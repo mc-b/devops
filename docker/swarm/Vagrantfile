@@ -1,0 +1,49 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+#
+#	Ubuntu Xenial 64-bit Linux mit Docker
+#
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ubuntu/xenial64-docker"
+  
+	# Packages vom lokalen Server holen und andere Server via /etc/hosts bekannt machen
+	config.vm.provision "shell", inline: <<-SHELL
+        # sudo sed -i -e"1i deb {{config.server}}/apt-mirror/mirror/archive.ubuntu.com/ubuntu xenial main restricted" /etc/apt/sources.list 
+	    # Redis Client zum Testen	
+	    sudo apt-get update
+	    sudo apt-get install -y redis-tools	
+	    # 
+	    echo '127.0.0.1 localhost\n192.168.55.100 master\n192.168.55.101 worker1\n192.168.55.102 worker2' > /etc/hosts
+SHELL
+
+  # Create a public network, which generally matched to bridged network.
+  config.vm.define "master" do |db|
+	db.vm.provider "virtualbox" do |vb|
+	  vb.memory = "512"  
+	end
+    db.vm.hostname = "master"
+    db.vm.network "private_network", ip: "192.168.55.100"
+	db.vm.network "forwarded_port", guest:80 , host:8080, auto_correct: false
+	db.vm.network "forwarded_port", guest:2377 , host:2377, auto_correct: false	
+  end
+  
+  config.vm.define "worker1" do |work1|
+    work1.vm.hostname = "worker1"
+    work1.vm.network "private_network", ip:"192.168.55.101"
+	work1.vm.provider "virtualbox" do |vb|
+	  vb.memory = "768"  
+	end     
+   end 
+   
+  config.vm.define "worker2" do |work2|
+    work2.vm.hostname = "worker2"
+    work2.vm.network "private_network", ip:"192.168.55.102"
+	work2.vm.provider "virtualbox" do |vb|
+	  vb.memory = "768"  
+	end     
+   end    
+
+end
