@@ -19,3 +19,11 @@ Der Entwickler erstellt die Anwendung und lädt diese in die Cloud. Diese kümme
 
 * [DevOps in der Praxis](https://www.eb-zuerich.ch/angebot/devops-in-der-praxis.html) 
 * [Docker - Container Umgebung aufbauen und betreiben](https://www.eb-zuerich.ch/angebot/docker.html)
+
+### Benötigte Software
+
+* [Git](https://git-scm.com/)
+* [Vagrant](https://www.vagrantup.com/)
+* [VirtualBox](https://www.virtualbox.org/)
+
+**Hinweis:** Git auf Windows ohne CR/LF Umwandlung installieren.
