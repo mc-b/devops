@@ -7,7 +7,11 @@
 
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "ubuntu/xenial64-docker"
+  config.vm.box = "ubuntu/xenial64"
+  
+  # Docker Provisioner
+  config.vm.provision "docker" do |d|
+  end  
 
   # Create a public network, which generally matched to bridged network.
   config.vm.define "node1" do |db|
