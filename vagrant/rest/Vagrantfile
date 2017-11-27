@@ -36,7 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   	web.vm.synced_folder ".", "/vagrant"  	
 	web.vm.provision "shell", inline: <<-SHELL
 		sudo apt-get update
-		sudo apt-get -y install debconf-utils apache2 nmap
+		sudo apt-get -y install debconf-utils apache2 nmap dos2unix
 		sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password password admin'
 		sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password admin'
 		sudo apt-get -y install php libapache2-mod-php php-curl php-cli php-mysql php-gd mysql-client  
@@ -47,6 +47,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 		echo "Alias /adminer.php /usr/share/adminer/adminer.php" | sudo tee /etc/apache2/conf-available/adminer.conf
 		sudo a2enconf adminer.conf 
 		sudo a2enmod cgi
+		sudo dos2unix /vagrant/rest 
+		sudo dos2unix /vagrant/restsql
 		sudo cp /vagrant/rest /vagrant/restsql /usr/lib/cgi-bin/ && sudo chown www-data /usr/lib/cgi-bin/rest* && sudo chmod 755 /usr/lib/cgi-bin/rest*
 		sudo mkdir -p  /var/www/html/data && sudo chown www-data:www-data /var/www/html/data 
 		sudo service apache2 restart 
