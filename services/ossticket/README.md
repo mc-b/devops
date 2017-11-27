@@ -32,7 +32,7 @@ Es leitet Anfragen, die per E-Mail, Webformularen und Telefonanrufen erstellt wu
 
 **User Interface:**
 
-[http://localhost:8080/scp](http://localhost:8080/scp)
+[http://localhost:8080/scp/](http://localhost:8080/scp/)
 	
 * username: ostadmin
 * password: Admin1
