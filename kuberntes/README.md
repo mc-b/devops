@@ -38,6 +38,15 @@ Der Service ist dann über folgenden Path zugreifbar:
 Stoppen und Löschen (löscht den Service, die Bereitstellung und den Zugriff via /path).
 
 	kc delete service,deployments,ingresses fhem
+
+Wenn nicht mit einen Zugriffs Path (Ingresses) gearbeitet werden kann, ist mit NodePort oder LoadBalancer zu arbeiten.
+Dabei wird kein Ingress erstellt sondern dem Service der nächste freie Port im LoadBalancer zugewiesen.
+
+Für ein Beispiel siehe [fhem-port.yaml](iot/fhem-port.yaml). Der Zugriff auf den Services kann mittels `minikube` erfolgen:
+
+	minikube service --url fhem-port
+	
+Wird `minikube` ohne --url aufgerufen, wird statt der Ausgabe des URL's der Standardbrowser aufgerufen.
 	
 ### Tutorials
 
