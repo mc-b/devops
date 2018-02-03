@@ -12,6 +12,10 @@ Kubernetes Beispiele
 
 - [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) und [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) downloaden in in PATH ablegen
 
+- Dieses Repository in der Git/Bash Shell clonen:
+
+	git clone https://github.com/mc-b/devops.git
+
 minikube starten (Windows: via PowerShell auf LW C: !)
 
 	minikube start --vm-driver=virtualbox
