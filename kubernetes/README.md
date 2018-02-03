@@ -1,11 +1,18 @@
 Kubernetes Beispiele
 --------------------
 
+### Benötigte Software
+
+* [Git](https://git-scm.com/)
+* [VirtualBox](https://www.virtualbox.org/)
+
+**Hinweis:** Git auf Windows ohne CR/LF Umwandlung installieren.
+
 ### Installation via Minikube - Windows
 
 - [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) und [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) downloaden in in PATH ablegen
 
-minikube starten (via PowerShell auf LW C: !)
+minikube starten (Windows: via PowerShell auf LW C: !)
 
 	minikube start --vm-driver=virtualbox
 	
@@ -13,9 +20,24 @@ Web Oberfläche starten
 
 	minikube dashboard
 	
-Docker Umgebungsvariablen ausgeben (diese entweder in Startscript `.bashrc` oder in Windows als Umgebungsvariablen setzen):
+Docker Umgebungsvariablen ausgeben 
 
 	minikube docker-env
+	
+Ausgabe z.B. unter Windows:
+
+	SET DOCKER_TLS_VERIFY=1
+	SET DOCKER_HOST=tcp://192.168.99.100:2376
+	SET DOCKER_CERT_PATH=C:\Users\<Username>\.minikube\certs
+	SET DOCKER_API_VERSION=1.23
+	REM Run this command to configure your shell:
+	REM @FOR /f "tokens=*" %i IN ('minikube docker-env') DO @%i
+
+Diese Variablen werden gebraucht um von der Kommandozeile auf den Kubernetes Cluster zuzugreifen.
+
+Sie sollten, in Windows als Umgebungsvariablen und unter Linux/Mac im Startupscript `.bashrc` eingetragen werden.
+
+ACHTUNG: bei Starten/Stoppen des Cluster kann evtl. eine andere IP-Adresse vergeben werden.	
 	
 ### Starten und Stoppen von Services
 
@@ -25,7 +47,7 @@ Am einfachsten ist es wenn eine Beschreibung im YAML Format, z.B. [fhem.yaml](io
 
 FHEM Hausautomation Service starten
 
-	kubectl create -f fhem.yaml
+	kubectl create -f iot/fhem.yaml
 	
 Erstellten Service, Bereitstellung und Zugriffspath überprüfen
 
@@ -44,7 +66,7 @@ Dabei wird kein Ingress erstellt sondern dem Service der nächste freie Port im 
 
 Für ein Beispiel siehe [fhem-port.yaml](iot/fhem-port.yaml). Der Zugriff auf den Services kann mittels `minikube` erfolgen:
 
-	minikube service --url fhem-port
+	minikube service --url iot/fhem-port
 	
 Wird `minikube` ohne --url aufgerufen, wird statt der Ausgabe des URL's der Standardbrowser aufgerufen.
 	
