@@ -69,6 +69,11 @@ Für ein Beispiel siehe [fhem-port.yaml](iot/fhem-port.yaml). Der Zugriff auf de
 	minikube service --url iot/fhem-port
 	
 Wird `minikube` ohne --url aufgerufen, wird statt der Ausgabe des URL's der Standardbrowser aufgerufen.
+
+### Beispiele
+
+* [Internet der Dinge](iot)
+* [OS Ticket](osticket)
 	
 ### Tutorials
 
