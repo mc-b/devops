@@ -16,6 +16,25 @@ Zugangsdaten:
 * Username: test
 * Password: secret
 
+### Daten in MySQL importieren
+
+Dazu steht ein Docker Image, mit Installiertem mysql-client und git, zur Verfügung.
+
+Docker Image builden:
+
+	docker build . -t loaddata
+	
+Docker Image als Pod laufen lassen:
+
+	kubectl run --image loaddata lc --image-pull-policy=IfNotPresent --restart=Never
+	
+Aufräumen:
+
+	kubectl delete pod lc
+
+In `loaddata.sh` stehen die SQL Befehle drin, um die Datanbank mit Daten zu füllen.
+
+
 ### MySQL Kommandline
 
 Im MySQL Container kann mit folgendem Befehle eine `Bash` gestartet werden:
