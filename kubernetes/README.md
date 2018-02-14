@@ -78,6 +78,7 @@ Wird `minikube` ohne --url aufgerufen, wird statt der Ausgabe des URL's der Stan
 
 * [Internet der Dinge](iot)
 * [OS Ticket](osticket)
+* [Helm](helm)
 	
 ### Tutorials
 
