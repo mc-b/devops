@@ -3,9 +3,9 @@ Test Container aus dem Internet der Dinge Bereich
 
 ### FHEM
 
-[FHEM]() ist ein einfache Hausautomationslösung welche in Perl geschrieben ist.
+[FHEM](http://fhem.de/) ist ein einfache Hausautomationslösung welche in Perl geschrieben ist.
 
-Für [FHEM]() existiert ein Container einer vordefinierten Konfiguration um den [IoTKit]() anzusprechen.
+Für [FHEM](http://fhem.de/) existiert ein Container einer vordefinierten Konfiguration um den [IoTKit](https://github.com/mc-b/IoTKitV2/blob/master/smarthome/02-FHEM.md) anzusprechen.
 
 FHEM Starten - Port Weiterleitungs Variante
 
