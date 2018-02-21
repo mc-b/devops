@@ -43,11 +43,16 @@ Statt Maven und Java auf dem eigenen System zu installieren, kann der [maven Con
 Container erzeugen und in diesen wechseln:
 
 	kubectl create -f maven.yaml
-	kubectl exec -it maven -- bash
+	kubectl exec -it maven-<ID> -- bash
 	
 Anschliessend können die Befehle laut [BPMN-Backend](https://github.com/bernet-tbz/bpmn-tutorial/tree/master/bpmn-backend) ausgeführt werden.
 
 Dabei wird im Verzeichnis `C:\Users\tmp` (Linux: `/home/tmp`) ein Verzeichnis mit den Maven Projekt erzeugt.
+
+Um den Port 8080 ausserhalb des Containers sichtbar zu machen, muss in der Datei `ch.tbz.bpmn.backend.Main.java` die Konstante `BASE_URI` angepasst werden.
+
+    // Base URI the Grizzly HTTP server will listen on
+    public static final String BASE_URI = "http://0.0.0.0:8080/myapp/";
 
 ### DotNet
 
