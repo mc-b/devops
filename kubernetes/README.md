@@ -8,6 +8,8 @@ Kubernetes Beispiele
 
 **Hinweis:** Git auf Windows ohne CR/LF Umwandlung installieren.
 
+Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt. Trick: Download neuste [Zip-Datei](https://download.docker.com/win/static/stable/x86_64/), diese entpacken und `docker.exe` im PATH ablegen.  
+
 ### Installation via Minikube - Windows
 
 - [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) und [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) downloaden in in PATH ablegen
@@ -78,8 +80,9 @@ Wird `minikube` ohne --url aufgerufen, wird statt der Ausgabe des URL's der Stan
 
 * [Internet der Dinge](iot)
 * [OS Ticket](osticket)
-* [Minio](minio)
 * [MySQL und Adminer](mysql)
+* [Compiler](compiler)
+* [Minio](minio)
 * [Helm](helm)
 * [Tests - ohne Beschreibung](test)
 	
