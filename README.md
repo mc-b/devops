@@ -3,6 +3,8 @@ DevOps Beispiele
 
 * [Vagrant Beispiele](vagrant/)
 * [Docker Beispiele](docker/)
+* [Kubernetes - im Aufbau](kubernetes/)
+* [OpenShift - im Aufbau](openshift/)
 
 ### Kurse
 
