@@ -10,6 +10,16 @@ Kubernetes Beispiele
 
 Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt. Trick: Download neuste [Zip-Datei](https://download.docker.com/win/static/stable/x86_64/), diese entpacken und `docker.exe` im PATH ablegen.  
 
+### Beispiele
+
+* [Internet der Dinge](iot)
+* [OS Ticket](osticket)
+* [MySQL und Adminer](mysql)
+* [Compiler](compiler)
+* [Minio](minio)
+* [Helm](helm)
+* [Tests - ohne Beschreibung](test)
+
 ### Installation via Minikube - Windows
 
 - [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) und [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) downloaden in in PATH ablegen
@@ -45,7 +55,7 @@ Sie sollten, in Windows als Umgebungsvariablen und unter Linux/Mac im Startupscr
 
 ACHTUNG: bei Starten/Stoppen des Cluster kann evtl. eine andere IP-Adresse vergeben werden.	
 	
-### Starten und Stoppen von Services
+#### Starten und Stoppen von Services
 
 Services können mittels dem CLI [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) oder via Weboberfläche gestartet werden.
 
@@ -76,15 +86,30 @@ Für ein Beispiel siehe [fhem-port.yaml](iot/fhem-port.yaml). Der Zugriff auf de
 	
 Wird `minikube` ohne --url aufgerufen, wird statt der Ausgabe des URL's der Standardbrowser aufgerufen.
 
-### Beispiele
+### Installation - Docker Community (CE) Edition 
 
-* [Internet der Dinge](iot)
-* [OS Ticket](osticket)
-* [MySQL und Adminer](mysql)
-* [Compiler](compiler)
-* [Minio](minio)
-* [Helm](helm)
-* [Tests - ohne Beschreibung](test)
+Sicherstellen, dass das System wo Docker installiert wird, mindestens 8 GB RAM hat.
+
+Docker CE (Edge) vom [Docker Store](https://store.docker.com/search?type=edition&offering=community) downloaden und installieren.
+
+Auf Docker Settings wechseln und im Tab Kubernetes, CheckBox Kubernetes aktivieren.
+
+Kubernetes DashBoard installieren und Port weiterleiten:
+
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+	kubectl proxy
+	 
+Aufruf des DashBoards mittels (die Securityeinstellungen können mittels `skip` übergangen werden):
+
+[http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
+
+Der Services müssen auf `NodePort` zusteuern. Die IP-Adresse des `NodePort` findet man in den Docker Settings unter Network, der `NodePort` bekommt die IP-Adresse 1, z.B. 10.0.75.1. Aus dem gemapptem Port des Services und der IP Adresse des `NodePorts` ergibt sich der URL: z.B. http://10.0.75.1:30549.
+
+
+#### Links
+
+* [Kubernetes-powered Docker CE ](https://www.melvinvivas.com/kubernetes-powered-docker-ce/)
+* [DashBoard](https://github.com/kubernetes/dashboard)
 	
 ### Tutorials
 
