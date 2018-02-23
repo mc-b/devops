@@ -50,7 +50,7 @@ In die obenHAB Oberfläche wechseln und kontrollieren ob unter `Configuration` -
 
 Wenn Nein: Unter `Configuration` -> `System` -> `Add-on Management` die Unterstützung für 1.x Bindings aktivieren.
 
-Mittels `Configuration` -> `Things` zuerst IoTKit Gateway, mit IP-Adresse des IoTKit, erstellen. Anschliessend können die Einzeln Geräte wie LED, Sensoren, Aktoren etc. erstellt werden.
+Mittels `Configuration` -> `Things` zuerst IoTKit Gateway, mit IP-Adresse des IoTKit, erstellen. Anschliessend können die Einzelnen IoTKit Geräte wie LED, Sensoren, Aktoren etc. erstellt werden.
 
 #### Links
 
