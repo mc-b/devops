@@ -1,5 +1,9 @@
-Test Container aus dem Internet der Dinge Bereich
--------------------------------------------------
+Internet der Dinge
+------------------
+
+Das Internet der Dinge (IoT) vernetzt die Physische Welt mit der Digitalen Welt.
+
+Nachfolgend sind Server und Tools beschrieben, welche im u.a. im Zusammenspiel mit dem [IoTKit](https://github.com/mc-b/IoTKitV2) verwendet werden können.
 
 ### FHEM
 
@@ -83,3 +87,28 @@ Daten an Mosquitto Broker senden:
 * [MQTT Publish](https://github.com/mc-b/IoTKitV2/blob/master/mqtt/MQTTPublish)
 * [MQTT Subcribe](https://github.com/mc-b/IoTKitV2/blob/master/mqtt/MQTTSubscribe)
 
+### Node-RED
+
+Node-RED ist ein Programmierwerkzeug, um Hardwaregeräte, APIs und Online-Dienste auf neue Weise miteinander zu verbinden.
+
+Es stellt einen Browser-basierten Editor zur Verfügung, der das Zusammenfassen von Datenflüssen mit Hilfe von zahlreichen sogenannten Nodes erleichtert.
+
+**Node-RED Standard Version** mit HTTP und MQTT Unterstützung starten:
+
+	kubectl create -f nodered.yaml
+	minikube service nodered.yaml
+
+**Node-RED mit CoAP Unterstützung** (nicht Live getestet!)
+
+Dazu muss zuerst vom IoTKit Projekt das Dockerfile geholt werden, ein Docker Image erstellt und anschliessend dieses gestartet werden:
+
+	git clone https://github.com/mc-b/IoTKitV2.git
+	cd IoTKitV2/vagrant/nodered-coap
+	docker build -t nodered-coap .
+	kubectl create -f nodered-coap.yaml
+	minikube service nodered-coap.yaml
+
+#### Links
+
+* [Node-RED Homepage](https://nodered.org/)
+* [Node-RED Workflow erstellen](https://github.com/mc-b/IoTKitV2/tree/master/workflow)
