@@ -20,7 +20,6 @@ Aufruf FHEM UI mittels folgendem URL:
 
 	http://<IP LoadBalancer>/fhem
 
-
 ### OpenHAB (Eclipse Smart Home)
 
 open Home Automation Bus (openHAB) ist eine in Java entwickelte Softwarelösung, die Komponenten zur Gebäudeautomatisierung von den verschiedensten Anbietern hersteller- und protokollneutral in einer Plattform miteinander verbindet.
@@ -32,7 +31,7 @@ openHAB Starten (Standard Image)
 	
 In der openHAB Oberfläche die Demo Oberfläche initialisieren und dann ins PaperUI wechseln.
 
-[IoTKit](RPCHTTPServerSmartHomeV2) an USB und Ethernet Kabel anschliessen und [RPCHTTPServerSmartHomeV2](https://os.mbed.com/teams/smdiotkit2ch/code/RPCHTTPServerSmartHomeV2/) Programm auf IoTKit laden. Reset Taste drücken und IP-Adresse, welche auf dem OLED-Display angezeigt wird notieren.
+[IoTKit](https://github.com/mc-b/IoTKitV2) an USB und Ethernet Kabel anschliessen und [RPCHTTPServerSmartHomeV2](https://os.mbed.com/teams/smdiotkit2ch/code/RPCHTTPServerSmartHomeV2/) Programm auf IoTKit laden. Reset Taste drücken und IP-Adresse, welche auf dem OLED-Display angezeigt wird notieren.
 	
 Zurück auf der Kommandline: Pod-Id ausgeben
 
@@ -55,3 +54,32 @@ Mittels `Configuration` -> `Things` zuerst IoTKit Gateway, mit IP-Adresse des Io
 #### Links
 
 * [CH Open Workshoptage 2015](https://os.mbed.com/teams/ch-open-wstage2015/wiki/SmartHome)
+
+### Mosquitto
+
+Mosquitto – Open-Source-MQTT-Broker und Teil des Eclipse-IoT-Projektes (iot.eclipse.org).
+
+Mosquitto Starten
+
+	kubectl create -f mosquitto.yaml
+	
+Mosquitto Port (Original 1883) anzeigen  	
+
+	kubectl get services -o wide --selector=app=mosquitto
+
+Mittels den Mosquitto Client Programmen (`apt-get install mosquitto-clients`) oder dem [IoTKit](https://github.com/mc-b/IoTKitV2) können Nachrichten über den Mosquitto Broker gesendet und empfangen werden.
+
+Auf allen Topics horchen:
+
+	mosquitto_sub -p <Mosquitto-Port> -h 192.168.99.100 -t '#'
+
+Daten an Mosquitto Broker senden:
+
+	mosquitto_pub -p <Mosquitto-Port> -h 192.168.99.100 -t mbed/k64f/iotkit/light -m "1.1" -q 0	
+
+#### Links
+
+* [MQTT IoTKit](https://github.com/mc-b/IoTKitV2/tree/master/mqtt)
+* [MQTT Publish](https://github.com/mc-b/IoTKitV2/blob/master/mqtt/MQTTPublish)
+* [MQTT Subcribe](https://github.com/mc-b/IoTKitV2/blob/master/mqtt/MQTTSubscribe)
+
