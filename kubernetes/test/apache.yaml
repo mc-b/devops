@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: apache
+  labels:
+    app: apache
+    group: web
+    tier: frontend
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+  selector:
+    app: apache
+---
+apiVersion: apps/v1beta2 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      labels:
+        app: apache
+        group: web
+        tier: frontend
+    spec:
+      containers:
+      - name: apache
+        image: httpd
+        ports:
+        - containerPort: 80
+          name: apache
