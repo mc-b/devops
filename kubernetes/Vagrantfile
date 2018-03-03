@@ -1,0 +1,67 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+#
+#	Ubuntu Xenial 64-bit Linux mit Docker
+#
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ubuntu/xenial64"
+
+  # Create forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. 
+  # NOTE: This will enable public access to the opened ports
+  # kubectl port
+  # config.vm.network "forwarded_port", guest:8443, host:8443, auto_correct: false
+  # minikube dashboard port
+  # config.vm.network "forwarded_port", guest:30000, host:8080, auto_correct: false
+  # for i in 30200..30300
+  #  config.vm.network :forwarded_port, guest: i, host: i
+  # end
+    
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  # config.vm.hostname = "kube"
+  # config.vm.network "private_network", ip:"192.168.99.100"
+  # IP to be assigned via DHCP
+  config.vm.network "public_network"
+      
+  config.vm.provider "virtualbox" do |vb|
+     vb.memory = "2048"
+  end
+
+  # Docker Provisioner
+  config.vm.provision "docker" do |d|
+  end
+  
+config.vm.provision "shell", inline: <<-SHELL 
+    # Debug ON!!!
+    set -o xtrace
+	curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
+	curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl
+	
+	export MINIKUBE_WANTUPDATENOTIFICATION=false
+	export MINIKUBE_WANTREPORTERRORPROMPT=false
+	export MINIKUBE_HOME=/home/vagrant
+	export CHANGE_MINIKUBE_NONE_USER=true
+	mkdir $MINIKUBE_HOME/.kube || true
+	touch $MINIKUBE_HOME/.kube/config
+	
+	export KUBECONFIG=$MINIKUBE_HOME/.kube/config
+	sudo -E ./minikube start --vm-driver=none
+	
+	# this for loop waits until kubectl can access the api server that Minikube has created
+	for i in {1..150}; do # timeout for 5 minutes
+	   ./kubectl get po &> /dev/null
+	   if [ $? -ne 1 ]; then
+	      break
+	  fi
+	  sleep 2
+	done
+	
+	# kubectl commands are now able to interact with Minikube cluster   
+	sudo mv kubectl minikube /usr/local/bin 
+	sudo chown -R vagrant:vagrant /home/vagrant/.kube /home/vagrant/.minikube
+SHELL
+end
