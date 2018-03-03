@@ -5,6 +5,23 @@ Das Internet der Dinge (IoT) vernetzt die Physische Welt mit der Digitalen Welt.
 
 Nachfolgend sind Server und Tools beschrieben, welche im u.a. im Zusammenspiel mit dem [IoTKit](https://github.com/mc-b/IoTKitV2) verwendet werden können.
 
+### Apache / CGI-BIN / Bash
+
+Mittels [Apache Web Server](https://github.com/mc-b/IoTKitV2/tree/master/LAM) der Erweiterung [CGI-BIN](https://github.com/mc-b/IoTKitV2/blob/master/LAM/05-CGIScript.md) und einem Bash [Shellscript] kann das [REST Paradigma](https://de.wikipedia.org/wiki/Representational_State_Transfer) abgebildet werden.
+
+Alles verpackt in einem Container steht im Docker Image `marcel1691/apache-rest` zur Verfügung.
+
+Apache-REST Beispiel starten und URL abfragen
+
+	kubectl create -f apache-rest.yaml
+	minikube service apache-rest --url
+	
+Testen
+
+* siehe [REST Serverseite: CGI Script](https://github.com/mc-b/IoTKitV2/blob/master/LAM/05-CGIScript.md)
+
+`http://localhost` durch Ausgabe von `minikube` ersetzen.
+
 ### FHEM
 
 [FHEM](http://fhem.de/) ist ein einfache Hausautomationslösung welche in Perl geschrieben ist.

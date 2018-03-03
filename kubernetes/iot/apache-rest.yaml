@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
       - name: apache-rest
-        image: marcel1691/apache-apache-rest
+        image: marcel1691/apache-rest
         ports:
         - containerPort: 80
         stdin: true 
