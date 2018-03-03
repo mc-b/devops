@@ -7,7 +7,7 @@ Nachfolgend sind Server und Tools beschrieben, welche im u.a. im Zusammenspiel m
 
 ### Apache / CGI-BIN / Bash
 
-Mittels [Apache Web Server](https://github.com/mc-b/IoTKitV2/tree/master/LAM) der Erweiterung [CGI-BIN](https://github.com/mc-b/IoTKitV2/blob/master/LAM/05-CGIScript.md) und einem Bash [Shellscript] kann das [REST Paradigma](https://de.wikipedia.org/wiki/Representational_State_Transfer) abgebildet werden.
+Mittels [Apache Web Server](https://github.com/mc-b/IoTKitV2/tree/master/LAM) der Erweiterung [CGI-BIN](https://github.com/mc-b/IoTKitV2/blob/master/LAM/05-CGIScript.md) und einem Bash [Shellscript](https://github.com/mc-b/IoTKit/blob/master/docker/apache-rest/rest) kann das [REST Paradigma](https://de.wikipedia.org/wiki/Representational_State_Transfer) abgebildet werden.
 
 Alles verpackt in einem Container steht im Docker Image `marcel1691/apache-rest` zur Verfügung.
 
