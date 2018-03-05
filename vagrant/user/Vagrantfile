@@ -35,6 +35,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 	  sudo apt-get update
 	  sudo apt-get -y install apache2 mysql-client nmap
 	  echo '127.0.0.1 localhost web01\n192.168.55.100 db01' > /etc/hosts
+	  #  enable tunnelled clear text passwords
+	  sudo sed -i -e"s/^PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config
+	  sudo service sshd restart
 SHELL
 	end 
 	# User und Gruppen in alle VM hinzufuegen
@@ -44,5 +47,8 @@ SHELL
       sudo useradd admin02 -g myadmin -m -s /bin/bash 
       sudo chpasswd <<<admin01:admin
       sudo chpasswd <<<admin02:admin
+	  #  enable tunnelled clear text passwords
+	  sudo sed -i -e"s/^PasswordAuthentication no/PasswordAuthentication yes/" /etc/ssh/sshd_config
+	  sudo service sshd restart
 SHELL
  end
