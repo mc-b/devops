@@ -41,6 +41,8 @@ Vagrant.configure("2") do |config|
 config.vm.provision "shell", inline: <<-SHELL 
     # Debug ON!!!
     set -o xtrace
+    
+	# install kubernetes    
 	curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
 	curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl
 	
@@ -66,14 +68,6 @@ config.vm.provision "shell", inline: <<-SHELL
 	# kubectl commands are now able to interact with Minikube cluster   
 	sudo mv kubectl minikube /usr/local/bin 
 	sudo chown -R vagrant:vagrant /home/vagrant/.kube /home/vagrant/.minikube
-	
-	# disable dashboard port
-	sudo apt-get install -y ufw
-	sudo ufw default deny
-	sudo ufw allow ssh
-	sudo ufw allow 8443/tcp
-	sudo ufw allow 30002:40000/tcp
-	sudo ufw allow 30002:40000/udp
-	sudo ufw -f enable
+
 SHELL
 end
