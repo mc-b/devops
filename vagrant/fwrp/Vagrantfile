@@ -63,7 +63,7 @@ SHELL
 		sudo a2enmod proxy_html
 		sudo a2enmod proxy_http
 		# Reverse Proxy
-		sudo cp /vagrant/apache-proxy/001-reverseproxy.conf /etc/apache2/sites-available/
+		sudo cp /vagrant/001-reverseproxy.conf /etc/apache2/sites-available/
 		sudo ln -s /etc/apache2/sites-available/001-reverseproxy.conf /etc/apache2/sites-enabled/
 		# Services restart bzw. reload Konfiguration
 		sudo service cron reload

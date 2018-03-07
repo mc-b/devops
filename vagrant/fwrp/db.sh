@@ -11,7 +11,8 @@ sudo debconf-set-selections <<< 'mysql-server mysql-server/root_password_again p
 sudo apt-get install -y mysql-server ufw
 
 # MySQL Port oeffnen
-sudo sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf # TODO Datei /etc/mysql/mysql.conf.d/mysqld.cnf mittels sed so abaendern, dass MySQL Port fuer alle offen ist
+# Datei /etc/mysql/mysql.conf.d/mysqld.cnf mittels sed so abaendern, dass MySQL Port fuer alle offen ist
+sudo sed -i -e"s/^bind-address\s*=\s*127.0.0.1/bind-address = 0.0.0.0/" /etc/mysql/mysql.conf.d/mysqld.cnf 
 
 # User fuer Remote Zugriff einrichten - aber nur fuer Host web 192.168.55.101
 mysql -uroot -pS3cr3tp4ssw0rd <<%EOF%
