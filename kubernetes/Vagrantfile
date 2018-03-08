@@ -43,13 +43,13 @@ config.vm.provision "shell", inline: <<-SHELL
     set -o xtrace
     
 	# install kubernetes    
-	curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
 	curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl
+	curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
 	
 	export MINIKUBE_WANTUPDATENOTIFICATION=false
 	export MINIKUBE_WANTREPORTERRORPROMPT=false
 	export MINIKUBE_HOME=/home/vagrant
-	export CHANGE_MINIKUBE_NONE_USER=true
+	export CHANGE_MINIKUBE_NONE_USER=false
 	mkdir $MINIKUBE_HOME/.kube || true
 	touch $MINIKUBE_HOME/.kube/config
 	
@@ -68,6 +68,13 @@ config.vm.provision "shell", inline: <<-SHELL
 	# kubectl commands are now able to interact with Minikube cluster   
 	sudo mv kubectl minikube /usr/local/bin 
 	sudo chown -R vagrant:vagrant /home/vagrant/.kube /home/vagrant/.minikube
-
+	
+	# delete default-token - no access to dashboard
+	sleep 20
+	kubectl -n kube-system delete secret `kubectl -n kube-system get secret | grep default-token | awk '{ print $1}'`
+	kubectl create -f /vagrant/account.yaml
+	kubectl create -f /vagrant/role.yaml
+	# print access token - new access to dashboard
+	kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
 SHELL
 end
