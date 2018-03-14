@@ -1,0 +1,23 @@
+{
+  "CN": "*.kubestack.io",
+  "hosts": [
+    "127.0.0.1",
+    "192.168.99.100",
+    "kube",
+    "*.tbz.ch",
+    "*.fritz.box"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "CH",
+      "L": "Zurich",
+      "O": "Docker",
+      "OU": "Docker Engine",
+      "ST": "ZH"
+    }
+  ]
+}
