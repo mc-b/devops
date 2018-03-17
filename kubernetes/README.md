@@ -21,11 +21,50 @@ Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt
 * [Helm](helm)
 * [Tests - ohne Beschreibung](test)
 
+### Installation via Vagrant
+
+[docker](https://download.docker.com/win/static/stable/x86_64/) und [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) downloaden in in PATH ablegen
+
+Dieses Repository in der Git/Bash Shell clonen:
+
+	git clone https://github.com/mc-b/devops.git
+
+Virtuelle Maschine erstellen:
+
+	cd devops/kubernetes
+	vagrant up
+	
+Evtl. ist vorher die fixe IP und der Hostname im Vagrantfile anzupassen. Siehe Bemerkungen im Vagrantfile.
+
+Beim Starten werden zwei Verzeichnisse angelegt:
+
+- .docker - Zertifikate für Docker Client 
+- .kube - Konfigurationsdatei und Zertifikate für Kubernetes.
+
+Diese zwei Verzeichnisse sind ins HOME Verzeichnis des Users zu kopieren.
+
+Leider lässt das Standard Kubernetes Zertifikat keine Fixe IP Adresse zu, weshalb der Hostname in /etc/hosts 
+mit der fixen IP Adressen einzutragen ist, damit `kubectl` sauber funktioniert. 
+
+Anschliessend kann mittels `docker` und `kubectl` die Kubernetes VM gesteuert werden
+
+	docker -H <fixe IP>:2376 --tls ps
+	kubectl get services
+
+Um auf die `-H` und `--tls` Argumente verzichten zu können sind folgende Umgebungsvariablen zu setzen:
+
+	DOCKER_HOST=tcp://<fixe-IP>:2376
+	DOCKER_TLS_VERIFY=1
+
+Das Dashboard ist mittels `http://<fixe IP>:30000` erreichbar.
+
+Wird die IP-Adresse oder der Hostname geändert, muss die Virtuelle Maschine frisch erstellt werden.
+
 ### Installation via Minikube - Windows
 
 - [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) und [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) downloaden in in PATH ablegen
 
-- Dieses Repository in der Git/Bash Shell clonen:
+Dieses Repository in der Git/Bash Shell clonen:
 
 	git clone https://github.com/mc-b/devops.git
 
