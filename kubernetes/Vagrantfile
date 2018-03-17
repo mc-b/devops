@@ -132,7 +132,7 @@ WantedBy=multi-user.target
 	touch $MINIKUBE_HOME/.kube/config
 	
 	export KUBECONFIG=$MINIKUBE_HOME/.kube/config
-	sudo -E ./minikube start --vm-driver=none --apiserver-name vgkube
+	sudo -E ./minikube start --vm-driver=none --apiserver-name vgkube --apiserver-ips 192.168.55.100
 	
 	# this for loop waits until kubectl can access the api server that Minikube has created
 	for i in {1..150}; do # timeout for 5 minutes
@@ -156,7 +156,7 @@ apiVersion: v1
 clusters:
 - cluster:
     certificate-authority: ca.crt
-    server: https://vgkube:8443
+    server: https://192.168.55.100:8443
   name: vgkube
 contexts:
 - context:

@@ -43,9 +43,6 @@ Beim Starten werden zwei Verzeichnisse angelegt:
 
 Diese zwei Verzeichnisse sind ins HOME Verzeichnis des Users zu kopieren.
 
-Leider lässt das Standard Kubernetes Zertifikat keine Fixe IP Adresse zu, weshalb der Hostname in /etc/hosts 
-mit der fixen IP Adressen einzutragen ist, damit `kubectl` sauber funktioniert. 
-
 Anschliessend kann mittels `docker` und `kubectl` die Kubernetes VM gesteuert werden
 
 	docker -H <fixe IP>:2376 --tls ps
@@ -59,6 +56,8 @@ Um auf die `-H` und `--tls` Argumente verzichten zu können sind folgende Umgebu
 Das Dashboard ist mittels `http://<fixe IP>:30000` erreichbar.
 
 Wird die IP-Adresse oder der Hostname geändert, muss die Virtuelle Maschine frisch erstellt werden.
+
+ACHTUNG: Evtl. gesetzte Umgebungsvariablen `DOCKER_CERT_PATH` dürfen nicht gesetzt sein.
 
 ### Installation via Minikube - Windows
 
