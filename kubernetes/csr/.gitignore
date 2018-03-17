@@ -1,3 +1,4 @@
 /*.pem
 /*.csr
 /.docker/
+/docker-server-csr.json
