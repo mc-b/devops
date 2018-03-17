@@ -2,10 +2,7 @@
   "CN": "*.kubestack.io",
   "hosts": [
     "127.0.0.1",
-    "192.168.99.100",
-    "kube",
-    "*.tbz.ch",
-    "*.fritz.box"
+    "vgkube"
   ],
   "key": {
     "algo": "rsa",
