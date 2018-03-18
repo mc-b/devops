@@ -19,8 +19,8 @@ Vagrant.configure("2") do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   config.vm.hostname = "vgkube"
-  # config.vm.network "private_network", ip: "192.168.55.100"
-  config.vm.network "public_network", ip:"192.168.178.102"
+  config.vm.network "private_network", ip: "192.168.55.100"
+  # config.vm.network "public_network", ip:"192.168.55.100"
   
   # default router TBZ.
   # config.vm.provision "shell",
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
   "hosts": [
     "127.0.0.1",
     "vgkube",
-    "192.168.178.102"
+    "192.168.55.100"
   ],
   "key": {
     "algo": "rsa",
@@ -126,7 +126,7 @@ WantedBy=multi-user.target
     sudo apt-get update
     sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
     
-    sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address 192.168.178.102
+    sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address 192.168.55.100
     
     mkdir -p $HOME/.kube
 	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
