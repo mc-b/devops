@@ -174,12 +174,5 @@ users:
     client-key: client.key
 %EOF%
 	
-	# delete default-token - no access to dashboard
-	# sleep 20
-	# kubectl -n kube-system delete secret `kubectl -n kube-system get secret | grep default-token | awk '{ print $1}'`
-	# kubectl create -f /vagrant/account.yaml
-	# kubectl create -f /vagrant/role.yaml
-	# print access token - new access to dashboard
-	# kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
 SHELL
 end
