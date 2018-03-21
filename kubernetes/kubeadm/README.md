@@ -50,12 +50,3 @@ Das Dashboard ist Standardmässig nicht erreichbar. Dazu muss zuerst ein Proxy z
 Anschliessend kann das Dashboard angewählt werden. Der Logindialog kann mit `Skip` übersprungen werden.
 
 [http://localhost:8001/ui/](http://localhost:8001/ui/)
-
-### Neue Nodes hinzufügen (nicht getestet)
-
-Neue Nodes können mittels der Standard Vagrant Docker Umgebung aufgesetzt werden. Der Master muss
-via ssh sich mit den Nodes verbinden können.
-
-Anschliessend sind auf jeder Node der Token und Hash, von der Ausgabe von `kubeadm init` wie folgt auszuführen:
-
-	kubeadm join --token <token> --discovery-token-ca-cert-hash <hash>
