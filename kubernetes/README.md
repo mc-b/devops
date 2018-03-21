@@ -105,6 +105,30 @@ Anschliessend kann das Dashboard angewählt werden. Der Logindialog kann mit `Sk
 
 [http://localhost:8001/ui/](http://localhost:8001/ui/)
 
+#### Cluster einrichten
+
+Die Kubernetes/Vagrant Installation ist Standardmässig Clusterfähig. Bei der Installation wird der Befehl ausgegeben, um weitere Nodes hinzuzufügen. Der Befehl sieht in etwa so aus:
+
+	kubeadm join --token <token> 192.168.60.100:6443 --discovery-token-ca-cert-hash <hash>
+
+Weitere Nodes können mittels der Docker Umgebung hinzugefügt werden.
+
+Vorgehen, [Docker](../docker/) VM normal aufsetzen und `kubeadm` installieren.
+
+	sudo -i
+	curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    sudo echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/Kubernetes.list
+    sudo apt-get update
+    sudo apt-get install -y kubelet kubeadm
+
+Nach der Installation ist der `kubeadm join` Befehl von oben auszuführen. Dadurch wird die Docker VM dem Kubernetes Cluster hinzugefügt. 
+
+Getestet kann der Cluster mittels dem dockercloud/hello-world Images.
+
+	kubectl create -f test/dockercloud.yaml
+	
+Es werden 3 Container/Pods erstellt, welche gleichmässig auf die Nodes verteilt werden.
+
 ### Installation via Minikube - Windows
 
 - [minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) und [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) downloaden in in PATH ablegen
