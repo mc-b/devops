@@ -121,13 +121,21 @@ Vorgehen, [Docker](../docker/) VM normal aufsetzen und `kubeadm` installieren.
     sudo apt-get update
     sudo apt-get install -y kubelet kubeadm
 
-Nach der Installation ist der `kubeadm join` Befehl von oben auszuführen. Dadurch wird die Docker VM dem Kubernetes Cluster hinzugefügt. 
+Nach der Installation ist der `kubeadm join` Befehl von oben auszuführen. Dadurch wird die Docker VM dem Kubernetes Cluster hinzugefügt. Falls der `kubeadm join` nicht mehr sichtbar ist, kann ein neuer Token generiert wreden.
+
+	sudo kubeadm token create --print-join-command
 
 Getestet kann der Cluster mittels dem dockercloud/hello-world Images.
 
 	kubectl create -f test/dockercloud.yaml
 	
 Es werden 3 Container/Pods erstellt, welche gleichmässig auf die Nodes verteilt werden.
+
+Node wieder aus Cluster entfernen:
+
+	kubectl drain --ignore-daemonsets <node>
+    kubectl delete node <node>
+    
 
 ### Installation via Minikube - Windows
 

@@ -1,0 +1,44 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+#
+#	Ubuntu Xenial 64-bit Linux Node mit Docker und Kubernetes
+#
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ubuntu/xenial64"
+  # resize hd, need a plugin vagrant-disksize, see https://github.com/sprotheroe/vagrant-disksize
+  # config.disksize.size = '40GB'
+      
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  config.vm.hostname = "node1"
+  config.vm.network "private_network", ip: "192.168.60.110"
+  # config.vm.network "public_network", ip:"192.168.60.110"
+  
+  # default router TBZ.
+  # config.vm.provision "shell",
+  #   run: "always",
+  #  inline: "route add default gw 10.1.66.254 enp0s8"  
+
+  config.vm.provider "virtualbox" do |vb|
+     vb.memory = "1024"
+  end
+
+  # Docker Provisioner
+  config.vm.provision "docker" do |d|
+  end
+  
+  config.vm.provision "shell", inline: <<-SHELL 
+    # Debug ON!!!
+    set -o xtrace
+
+	# Install Kubernetes
+	curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    sudo echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/Kubernetes.list
+    sudo apt-get update
+    sudo apt-get install -y kubelet kubeadm 
+    
+SHELL
+end
