@@ -8,24 +8,25 @@
 #	Soll ein anderer Hostname als vgkube oder der fixen IP verwendet werden sind 
 #	diese mittels suchen und ersetzen im Vagrantfile zu ändern.
 #	Ebenfalls kann zwischen einem Host-Only oder Public-IP gewaehlt werden.
+#
 
 Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/xenial64"
-
   # resize hd, need a plugin vagrant-disksize, see https://github.com/sprotheroe/vagrant-disksize
-  # config.disksize.size = '30GB'
-  
-  # Hostname und fixe IP
+  # config.disksize.size = '40GB'
+      
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
   config.vm.hostname = "vgkube"
-  config.vm.network "private_network", ip: "192.168.55.100"
-  # config.vm.network "public_network", ip: "192.168.178.100"
+  config.vm.network "private_network", ip: "192.168.60.102"
+  # config.vm.network "public_network", ip:"192.168.60.102"
   
   # default router TBZ.
   # config.vm.provision "shell",
   #   run: "always",
-  #  inline: "route add default gw 10.1.66.254 enp0s8"
-      
+  #  inline: "route add default gw 10.1.66.254 enp0s8"  
+
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "2048"
   end
@@ -34,11 +35,10 @@ Vagrant.configure("2") do |config|
   config.vm.provision "docker" do |d|
   end
   
-config.vm.provision "shell", inline: <<-SHELL 
+  config.vm.provision "shell", inline: <<-SHELL 
     # Debug ON!!!
     set -o xtrace
-	
-	# Docker Daemon absichern
+
 	wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O cfssljson
 	wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O cfssl
 	sudo chmod +x cfssljson cfssl
@@ -51,7 +51,7 @@ config.vm.provision "shell", inline: <<-SHELL
   "hosts": [
     "127.0.0.1",
     "vgkube",
-    "192.168.55.100"
+    "192.168.60.102"
   ],
   "key": {
     "algo": "rsa",
@@ -119,22 +119,20 @@ WantedBy=multi-user.target
 
 	sudo systemctl daemon-reload
 	sudo systemctl restart docker
+
+	# Install Kubernetes
+	curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+    sudo echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/Kubernetes.list
+    sudo apt-get update
+    sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
     
-	# install kubernetes    
-	curl -Lo kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl
-	curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube
-	
-	export MINIKUBE_WANTUPDATENOTIFICATION=false
-	export MINIKUBE_WANTREPORTERRORPROMPT=false
-	export MINIKUBE_HOME=/home/vagrant
-	export CHANGE_MINIKUBE_NONE_USER=false
-	mkdir $MINIKUBE_HOME/.kube || true
-	touch $MINIKUBE_HOME/.kube/config
-	
-	export KUBECONFIG=$MINIKUBE_HOME/.kube/config
-	sudo -E ./minikube start --vm-driver=none --apiserver-name vgkube --apiserver-ips 192.168.55.100
-	
-	# this for loop waits until kubectl can access the api server that Minikube has created
+    sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address 192.168.60.102
+    
+    mkdir -p $HOME/.kube
+	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+	sudo chown $(id -u):$(id -g) $HOME/.kube/config
+    
+	# this for loop waits until kubectl can access the api server that kubeadm has created
 	for i in {1..150}; do # timeout for 5 minutes
 	   ./kubectl get po &> /dev/null
 	   if [ $? -ne 1 ]; then
@@ -142,37 +140,25 @@ WantedBy=multi-user.target
 	  fi
 	  sleep 2
 	done
+    
+    # Internes Pods Netzwerk
+    kubectl apply -f https://docs.projectcalico.org/v3.0/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
+    
+	# Pods auf Master Node erlauben
+	kubectl taint nodes --all node-role.kubernetes.io/master-
 	
-	# kubectl commands are now able to interact with Minikube cluster   
-	sudo mv kubectl minikube /usr/local/bin 
-	sudo chown -R vagrant:vagrant /home/vagrant/.kube /home/vagrant/.minikube	
+	# Vagrant User Zugriff auf Cluster erlauben
+	cp -rp $HOME/.kube /home/vagrant/
+	chown -R vagrant:vagrant /home/vagrant/.kube
+	# Externer Zugriff
+	cp -rp $HOME/.kube /vagrant/
 	
-	sudo rm -rf /vagrant/.kube && sudo mkdir -p /vagrant/.kube
-	sudo cp /home/vagrant/.minikube/ca.crt     /vagrant/.kube/
-	sudo cp /home/vagrant/.minikube/client.crt /vagrant/.kube/
-	sudo cp /home/vagrant/.minikube/client.key /vagrant/.kube/
-	cat >/vagrant/.kube/config <<%EOF%
-apiVersion: v1
-clusters:
-- cluster:
-    certificate-authority: ca.crt
-    server: https://192.168.55.100:8443
-  name: vgkube
-contexts:
-- context:
-    cluster: vgkube
-    user: minikube
-  name: vgkube
-current-context: vgkube
-kind: Config
-preferences: {}
-users:
-- name: minikube
-  user:
-    as-user-extra: {}
-    client-certificate: client.crt
-    client-key: client.key
-%EOF%
+	# Install nginx ingress
+	# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress/master/examples/deployment/nginx/kubeadm/nginx-ingress-controller.yaml
+	
+	# Dashboard und User einrichten - Zugriff kubectl proxy und beim Logins skip
+    kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+    kubectl create -f /vagrant/csr/dashboard-admin.yaml
 	
 SHELL
 end

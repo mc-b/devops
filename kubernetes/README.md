@@ -21,6 +21,44 @@ Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt
 * [Helm](helm)
 * [Tests - ohne Beschreibung](test)
 
+### Starten und Stoppen von Containern/Pods
+
+Nach einer der untenstehenden Installationsarten (Vagrant, Minikube, Docker) können Container/Pods mittels dem CLI [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) oder via Weboberfläche gestartet werden.
+
+Am einfachsten ist es wenn eine Beschreibung im YAML Format, z.B. [fhem.yaml](iot/fhem.yaml) vorhanden ist.
+
+Z.B. FHEM Hausautomation Service starten
+
+	kubectl create -f iot/fhem-port.yaml
+	
+Alle erstellte Objekte anzeigen lassen
+
+	kubectl get all -o wide	
+	
+oder 
+
+	kubectl get pods,service,deployment,replicaset -o wide --selector=app=fhem-port
+	
+Es sollte ein Pod, mit einem Replica-Set, einem Deployment und einen Service, jeweils mit `fhem-port` gelabbelt, vorhanden sein. Dem Services wurde der nächste freie Port der Node zugewiesen. 
+
+	kubectl get service -o wide --selector=app=fhem-port
+	
+Der URL ergibt sich aus der IP-Adresse der Node und dem Angezeigten Port, z.B. `http://192.168.60.102:30252`.
+
+	https://<IP Adresse LoadBalancer>/fhem, z.B. https://192.168.99.100/fhem
+	
+Stoppen und Löschen (löscht den Service, die Bereitstellung und den Zugriff via /path).
+
+	kubectl delete service,deployments,ingresses fhem
+
+Alternativ kann ein Container/Pod zum Arbeiten auf der CLI gestartet werden:
+
+	kubectl create -f test/debian.yaml
+	
+Wechsel in das CLI des Containers/Pods
+
+	kubectl exec -it debian -- bash
+
 ### Installation via Vagrant
 
 [docker](https://download.docker.com/win/static/stable/x86_64/) und [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) downloaden in in PATH ablegen
@@ -31,9 +69,9 @@ Dieses Repository in der Git/Bash Shell clonen:
 
 Virtuelle Maschine erstellen:
 
-	cd devops/kubernetes
+	cd devops/kubernetes/kubeadm
 	vagrant up
-	
+
 Evtl. ist vorher die fixe IP und der Hostname im Vagrantfile anzupassen. Siehe Bemerkungen im Vagrantfile.
 
 Beim Starten werden zwei Verzeichnisse angelegt:
@@ -53,11 +91,19 @@ Um auf die `-H` und `--tls` Argumente verzichten zu können sind folgende Umgebu
 	DOCKER_HOST=tcp://<fixe-IP>:2376
 	DOCKER_TLS_VERIFY=1
 
-Das Dashboard ist mittels `http://<fixe IP>:30000` erreichbar.
-
 Wird die IP-Adresse oder der Hostname geändert, muss die Virtuelle Maschine frisch erstellt werden.
 
-ACHTUNG: Evtl. gesetzte Umgebungsvariablen `DOCKER_CERT_PATH` dürfen nicht gesetzt sein.
+ACHTUNG: Evtl. gesetzte Umgebungsvariable `DOCKER_CERT_PATH` darf nicht gesetzt sein.
+
+#### Dashboard
+
+Das Dashboard ist Standardmässig nicht erreichbar. Dazu muss zuerst ein Proxy zur lokalen Maschine eingerichtet werden:
+	
+	kubectl proxy
+	
+Anschliessend kann das Dashboard angewählt werden. Der Logindialog kann mit `Skip` übersprungen werden.
+
+[http://localhost:8001/ui/](http://localhost:8001/ui/)
 
 ### Installation via Minikube - Windows
 
@@ -94,37 +140,6 @@ Sie sollten, in Windows als Umgebungsvariablen und unter Linux/Mac im Startupscr
 
 ACHTUNG: bei Starten/Stoppen des Cluster kann evtl. eine andere IP-Adresse vergeben werden.	
 	
-#### Starten und Stoppen von Services
-
-Services können mittels dem CLI [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) oder via Weboberfläche gestartet werden.
-
-Am einfachsten ist es wenn eine Beschreibung im YAML Format, z.B. [fhem.yaml](iot/fhem.yaml) vorhanden ist.
-
-FHEM Hausautomation Service starten
-
-	kubectl create -f iot/fhem.yaml
-	
-Erstellten Service, Bereitstellung und Zugriffspath überprüfen
-
-	kubectl get services,deployments,ingresses -o wide	
-	
-Der Service ist dann über folgenden Path zugreifbar:
-
-	https://<IP Adresse LoadBalancer>/fhem, z.B. https://192.168.99.100/fhem
-	
-Stoppen und Löschen (löscht den Service, die Bereitstellung und den Zugriff via /path).
-
-	kc delete service,deployments,ingresses fhem
-
-Wenn nicht mit einen Zugriffs Path (Ingresses) gearbeitet werden kann, ist mit NodePort oder LoadBalancer zu arbeiten.
-Dabei wird kein Ingress erstellt sondern dem Service der nächste freie Port im LoadBalancer zugewiesen.
-
-Für ein Beispiel siehe [fhem-port.yaml](iot/fhem-port.yaml). Der Zugriff auf den Services kann mittels `minikube` erfolgen:
-
-	minikube service --url iot/fhem-port
-	
-Wird `minikube` ohne --url aufgerufen, wird statt der Ausgabe des URL's der Standardbrowser aufgerufen.
-
 ### Installation - Docker Community (CE) Edition 
 
 Sicherstellen, dass das System wo Docker installiert wird, mindestens 8 GB RAM hat.
