@@ -19,8 +19,8 @@ Vagrant.configure("2") do |config|
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
   config.vm.hostname = "vgkube"
-  config.vm.network "private_network", ip: "192.168.60.102"
-  # config.vm.network "public_network", ip:"192.168.60.102"
+  config.vm.network "private_network", ip: "192.168.60.100"
+  # config.vm.network "public_network", ip:"192.168.60.100"
   
   # default router TBZ.
   # config.vm.provision "shell",
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
   "hosts": [
     "127.0.0.1",
     "vgkube",
-    "192.168.60.102"
+    "192.168.60.100"
   ],
   "key": {
     "algo": "rsa",
@@ -126,7 +126,7 @@ WantedBy=multi-user.target
     sudo apt-get update
     sudo apt-get install -y kubelet kubeadm kubectl kubernetes-cni
     
-    sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address 192.168.60.102
+    sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address 192.168.60.100
     
     mkdir -p $HOME/.kube
 	sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -142,7 +142,7 @@ WantedBy=multi-user.target
 	done
     
     # Internes Pods Netzwerk
-    kubectl apply -f https://docs.projectcalico.org/v3.0/getting-started/kubernetes/installation/hosted/kubeadm/1.7/calico.yaml
+	kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
     
 	# Pods auf Master Node erlauben
 	kubectl taint nodes --all node-role.kubernetes.io/master-
