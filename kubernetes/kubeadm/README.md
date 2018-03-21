@@ -43,17 +43,13 @@ ACHTUNG: Evtl. gesetzte Umgebungsvariablen `DOCKER_CERT_PATH` dürfen nicht gese
 
 ### Dashboard
 
-Das Dashboard ist Standardmässig nicht erreichbar. Dazu muss zuerst der Access Token wie folgt ermittelt werden:
-
-	kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+Das Dashboard ist Standardmässig nicht erreichbar. Dazu muss zuerst ein Proxy zur lokalen Maschine eingerichtet werden:
 	
-Der Proxy zur Lokalen Maschine eingerichtet werden:
-
 	kubectl proxy
 	
-Um dann das UI aufzurufen und mit dem Access Token von oben sich anzumelden:
+Anschliessend kann das Dashboard angewählt werden. Der Logindialog kann mit `Skip` übersprungen werden.
 
-[http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
+[http://localhost:8001/ui/](http://localhost:8001/ui/)
 
 ### Neue Nodes hinzufügen (nicht getestet)
 

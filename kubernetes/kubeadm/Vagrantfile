@@ -156,12 +156,9 @@ WantedBy=multi-user.target
 	# Install nginx ingress
 	# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress/master/examples/deployment/nginx/kubeadm/nginx-ingress-controller.yaml
 	
-	# Dashboard und User einrichten
+	# Dashboard und User einrichten - Zugriff kubectl proxy und beim Logins skip
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
-	kubectl create -f /vagrant/account.yaml
-	kubectl create -f /vagrant/role.yaml
-	# print access token - new access to dashboard
-	kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep admin-user | awk '{print $1}')
+    kubectl create -f /vagrant/csr/dashboard-admin.yaml
 	
 SHELL
 end
