@@ -162,6 +162,7 @@ Der Services müssen auf `NodePort` zusteuern. Die IP-Adresse des `NodePort` fin
 
 #### Links
 
+* [Using kubeadm to Create a Cluster](https://kubernetes.io/docs/setup/independent/create-cluster-kubeadm/)
 * [Kubernetes-powered Docker CE ](https://www.melvinvivas.com/kubernetes-powered-docker-ce/)
 * [DashBoard](https://github.com/kubernetes/dashboard)
 	
