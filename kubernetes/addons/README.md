@@ -1,6 +1,34 @@
 Add-Ons
 -------
 
+### Dashboard
+
+Kubernetes Dashboard ist eine webbasierte Benutzeroberfläche für Kubernetes-Cluster. Es ermöglicht Benutzern, im Cluster ausgeführte Anwendungen zu verwalten und Fehler zu beheben sowie den Cluster selbst zu verwalten.
+
+Je nach verwendeter Installation ist das Dashboard separat zu starten und anders anzusprechen.
+
+Links
+
+* [github Projekt](https://github.com/kubernetes/dashboard)
+
+### Ingress
+
+Ingress ist ein API-Objekt, das den externen Zugriff auf die Dienste in einem Cluster, normalerweise HTTP, verwaltet.
+
+Ingress kann Load-Balancing, SSL-Terminierung und namensbasiertes virtuelles Hosting bereitstellen.
+
+#### Installation
+
+Wenn Kubernetes Umgebung mit `minikube` installiert ist:
+
+	minikube addons enable ingress
+	
+Links
+
+* [Ingress Doku](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+* [Installation Guide](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/README.md)
+* [github Projekt](https://github.com/kubernetes/ingress-nginx)
+
 ### Weave Scope und Net
 
 [Weave Scope](https://www.weave.works/) ist ein Werkzeug zur grafischen Visualisierung Ihrer Container, Pods, Dienste usw.

@@ -33,7 +33,7 @@ FHEM Starten - Port Weiterleitungs Variante
 	kubectl create -f fhem-port.yaml
 	minikube service fhem-port
 
-FHEM Starten - Ingress Variante
+FHEM Starten - Ingress Variante (das Add-On [Ingress](../addons) muss enabled sein)
 
 	kubectel create -f fhem.yaml
 	

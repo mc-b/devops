@@ -153,12 +153,19 @@ WantedBy=multi-user.target
 	# Externer Zugriff
 	cp -rp $HOME/.kube /vagrant/
 	
-	# Install nginx ingress
-	# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress/master/examples/deployment/nginx/kubeadm/nginx-ingress-controller.yaml
+	# Install nginx ingress Add-on
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/namespace.yaml
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/default-backend.yaml
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/configmap.yaml 
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/tcp-services-configmap.yaml 
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/udp-services-configmap.yaml
+	kubectl apply -f  https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/rbac.yaml 
+	kubectl apply -f  https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/with-rbac.yaml 	
+	kubectl apply -f  /vagrant/addons/service-nodeport.yaml
 	
 	# Dashboard und User einrichten - Zugriff kubectl proxy und beim Logins skip
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
-    kubectl create -f /vagrant/csr/dashboard-admin.yaml
+    kubectl apply -f /vagrant/addons/dashboard-admin.yaml
 	
 SHELL
 end
