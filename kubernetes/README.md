@@ -131,6 +131,8 @@ Vorgehen, [Docker](../docker/) VM normal aufsetzen und `kubeadm` installieren.
     sudo echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/Kubernetes.list
     sudo apt-get update
     sudo apt-get install -y kubelet kubeadm
+    
+**Hinweis**: im Verzeichnis [node1](node1) steht ein Vagrantfile, welches obige Befehle automatisch ausführt, zur Verfügung.
 
 Nach der Installation ist der `kubeadm join` Befehl von oben auszuführen. Dadurch wird die Docker VM dem Kubernetes Cluster hinzugefügt. Falls der `kubeadm join` nicht mehr sichtbar ist, kann ein neuer Token generiert wreden.
 
