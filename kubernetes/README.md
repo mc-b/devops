@@ -20,6 +20,7 @@ Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt
 * [Minio](minio)
 * [Helm](helm)
 * [Tests - ohne Beschreibung](test)
+* [Add-Ons](addons)
 
 ### Starten und Stoppen von Containern/Pods
 
@@ -43,10 +44,15 @@ Es sollte ein Pod, mit einem Replica-Set, einem Deployment und einen Service, je
 
 	kubectl get service -o wide --selector=app=fhem-port
 	
-Der URL ergibt sich aus der IP-Adresse der Node und dem Angezeigten Port, z.B. `http://192.168.60.102:30252`.
+Der URL ergibt sich aus der IP-Adresse der Node und dem Angezeigten Port, z.B. 
 
-	https://<IP Adresse LoadBalancer>/fhem, z.B. https://192.168.99.100/fhem
-	
+    http://192.168.60.100:30252
+    
+Oder wenn NodePort IP und Port automatisch ermittelt werden soll:
+ 
+	echo "http"$(kubectl config view -o=jsonpath='{ .clusters[0].cluster.server }' \
+	| sed -e 's/https//g' -e 's/:6443//g')":"$(kubectl get svc fhem-port -o=jsonpath='{ .spec.ports[0].nodePort }')    
+
 Stoppen und Löschen (löscht den Service, die Bereitstellung und den Zugriff via /path).
 
 	kubectl delete service,deployments,ingresses fhem
@@ -207,3 +213,4 @@ Der Services müssen auf `NodePort` zusteuern. Die IP-Adresse des `NodePort` fin
 ### Reference
 
 * [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/)
+* [kubectl JSONPath Support](https://kubernetes.io/docs/reference/kubectl/jsonpath/)
