@@ -19,6 +19,7 @@ Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt
 * [Big Data](bigdata)
 * [Minio](minio)
 * [Helm](helm)
+* [DevOps Umgebung](devops)
 * [Tests - ohne Beschreibung](test)
 * [Add-Ons](addons)
 
