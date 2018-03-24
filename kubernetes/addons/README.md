@@ -35,6 +35,8 @@ Links
 
 Weave Net bietet Netzwerk- und Netzwerkrichtlinien, funktioniert auf beiden Seiten einer Netzwerkpartition und benötigt keine externe Datenbank.
 
+**Hinweis**: Damit Weave Scope richtig funktioniert, muss es auf dem Master Installiert werden, bevor weitere Nodes angeschlossen werden. Ebenfalls muss ein Default GW gesetzt sein.
+
 #### Installation
 
 	kubectl apply -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')"
