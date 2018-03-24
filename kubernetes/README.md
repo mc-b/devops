@@ -149,6 +149,7 @@ Node wieder aus Cluster entfernen:
 	kubectl drain --ignore-daemonsets <node>
     kubectl delete node <node>
     
+**Hinweis**: wenn die Pods z.B. mittels `kubectl exec -it <pod> -- bash` nicht gefunden werden können. Ist ein Default Gateway auf enp0s8 zu setzen, z.B. mittels `route add default gw 10.1.66.254 enp0s8`. Siehe auch Vagrantfile.     
 
 ### Installation via Minikube - Windows
 
