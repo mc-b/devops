@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: docker-cli
+spec:
+  volumes:
+  - name: "docker-cli-data"
+    hostPath:
+     path: "/data/docker-cli"
+  - name: "docker-sock"
+    hostPath:
+     path: "/var/run/docker.sock"     
+  containers:
+  - name: docker-cli
+    image: docker-cli:14.04
+    # Just spin & wait forever
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    volumeMounts:
+    - mountPath: "/home/data"
+      name: "docker-cli-data"
+    - mountPath: "/var/run/docker.sock"
+      name: "docker-sock"      
