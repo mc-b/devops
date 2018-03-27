@@ -57,7 +57,11 @@ Oder wenn NodePort IP und Port automatisch ermittelt werden soll:
 In Kombination mit `curl`
 
 	curl $(echo "http"$(kubectl config view -o=jsonpath='{ .clusters[0].cluster.server }' \
-	| sed -e 's/https//g' -e 's/:6443//g')":"$(kubectl get svc fhem-port -o=jsonpath='{ .spec.ports[0].nodePort }')"/fhem")	   
+	| sed -e 's/https//g' -e 's/:6443//g')":"$(kubectl get svc fhem-port -o=jsonpath='{ .spec.ports[0].nodePort }')"/fhem")	 
+	
+In in `PowerShell` mit Start Standard Browser
+
+	start (kubectl config view -o=jsonpath='{ .clusters[0].cluster.server }' | %{ $_-replace "https:","http:"} | %{ $_-replace "6443", (kubectl get svc fhem-port -o=jsonpath='{ .spec.ports[0].nodePort }')})/fhem
 
 Stoppen und Löschen (löscht den Service, die Bereitstellung und den Zugriff via /path).
 
