@@ -61,7 +61,9 @@ In Kombination mit `curl`
 	
 In in `PowerShell` mit Start Standard Browser
 
-	start (kubectl config view -o=jsonpath='{ .clusters[0].cluster.server }' | %{ $_-replace "https:","http:"} | %{ $_-replace "6443", (kubectl get svc fhem-port -o=jsonpath='{ .spec.ports[0].nodePort }')})/fhem
+	start (kubectl config view -o=jsonpath='{ .clusters[0].cluster.server }' | `
+	%{ $_-replace "https:","http:"} | `
+	%{ $_-replace "6443", (kubectl get svc fhem-port -o=jsonpath='{ .spec.ports[0].nodePort }')})/fhem
 
 Stoppen und Löschen (löscht den Service, die Bereitstellung und den Zugriff via /path).
 
