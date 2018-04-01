@@ -31,6 +31,19 @@ Ghost
 
 [http://localhost:2368](http://localhost:2368)
 
+**Testen:**
+
+	docker run -d --rm --name adminer -p8080:8080 --link ghost_mysql:mysql adminer
+
+[http://localhost:8080](http://localhost:8080) anwählen.
+
+Server  : ghost_mysql
+User    : ghost
+Password: secret
+Database: ghost
+
+Tabelle `posts` editieren.
+
 ### Docker Repositories
 
 * [ghost](https://hub.docker.com/_/ghost/)
