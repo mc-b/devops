@@ -41,3 +41,14 @@ Es leitet Anfragen, die per E-Mail, Webformularen und Telefonanrufen erstellt wu
 
 * [OSS Ticket](https://hub.docker.com/r/campbellsoftwaresolutions/osticket/)
 * [Offizielles MySQL Image](https://hub.docker.com/_/mysql/) 
+
+### Docker Befehlszeile
+
+Im `Vagrantfile` werden folgende Befehle ausgeführt:
+
+	docker run -d --name osticket_mysql -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_USER=osticket \
+				-e MYSQL_PASSWORD=secret -e MYSQL_DATABASE=osticket --restart=always mysql
+
+	docker run -d --name osticket --link osticket_mysql:mysql -p 8080:80 --restart=always \
+				campbellsoftwaresolutions/osticket
+								
