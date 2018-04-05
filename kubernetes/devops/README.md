@@ -43,3 +43,4 @@ Um die Blueocean Oberfläche anzusprechen ist dem URL /blue hintenanzustellen.
 
 * [Website](https://jenkins.io/)
 * [Docker Image](https://hub.docker.com/r/jenkinsci/blueocean/)
+* [Docker absichern](https://wiki.jenkins.io/display/JENKINS/Standard+Security+Setup)
