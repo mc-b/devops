@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: maven-cli
+spec:
+  containers:        
+  - name: maven-cli
+    image: maven
+    imagePullPolicy: IfNotPresent        
+    # Just spin & wait forever
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]
+    volumeMounts:
+    - mountPath: "/src"
+      name: "host-data"
+    - mountPath: "/var/run/docker.sock"
+      name: "docker-sock"   
+    - mountPath: "/usr/bin/kubectl"
+      name: "kubectl"          
+    - mountPath: "/root/.kube"
+      name: "kube"     
+    - mountPath: "/usr/bin/docker"
+      name: "docker"   
+    - mountPath: "/usr/lib/x86_64-linux-gnu/libltdl.so.7"
+      name: "libltdl"           
+  volumes:
+  - name: "host-data"
+    hostPath:
+     path: "/vagrant" 
+  - name: "docker-cli-data"
+    hostPath:
+     path: "/data/docker-cli"
+  - name: "docker-sock"
+    hostPath:
+     path: "/var/run/docker.sock" 
+  - name: "kubectl"
+    hostPath:
+     path: "/usr/bin/kubectl" 
+  - name: "kube"
+    hostPath:
+     path: "/home/vagrant/.kube"       
+  - name: "docker"
+    hostPath:
+     path: "/usr/bin/docker"
+  - name: "libltdl"
+    hostPath:
+     path: "/usr/lib/x86_64-linux-gnu/libltdl.so.7"              

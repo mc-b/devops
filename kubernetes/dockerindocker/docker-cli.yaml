@@ -9,10 +9,22 @@ spec:
      path: "/data/docker-cli"
   - name: "docker-sock"
     hostPath:
-     path: "/var/run/docker.sock"     
+     path: "/var/run/docker.sock" 
+  - name: "kubectl"
+    hostPath:
+     path: "/usr/bin/kubectl" 
+  - name: "kube"
+    hostPath:
+     path: "/home/vagrant/.kube"       
+  - name: "docker"
+    hostPath:
+     path: "/usr/bin/docker"
+  - name: "libltdl"
+    hostPath:
+     path: "/usr/lib/x86_64-linux-gnu/libltdl.so.7"                    
   containers:
   - name: docker-cli
-    image: docker-cli:14.04
+    image: ubuntu:14.04
     # Just spin & wait forever
     command: [ "/bin/bash", "-c", "--" ]
     args: [ "while true; do sleep 30; done;" ]
@@ -20,4 +32,12 @@ spec:
     - mountPath: "/home/data"
       name: "docker-cli-data"
     - mountPath: "/var/run/docker.sock"
-      name: "docker-sock"      
+      name: "docker-sock"   
+    - mountPath: "/usr/bin/kubectl"
+      name: "kubectl"          
+    - mountPath: "/root/.kube"
+      name: "kube"     
+    - mountPath: "/usr/bin/docker"
+      name: "docker"   
+    - mountPath: "/usr/lib/x86_64-linux-gnu/libltdl.so.7"
+      name: "libltdl"           
