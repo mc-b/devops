@@ -44,4 +44,4 @@ spec:
       volumes:
       - name: "host-data"
         hostPath:
-         path: "/c/Users/tmp"      
+         path: "/vagrant"      
