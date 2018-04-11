@@ -10,6 +10,7 @@ spec:
   type: NodePort
   ports:
   - port: 8080
+    nodePort: 32100  
     protocol: TCP
   selector:
     app: jenkins
@@ -30,9 +31,39 @@ spec:
         group: devops
         tier: frontend
     spec:
+      securityContext:
+       runAsUser: 1000
+       fsGroup: 999    
       containers:
       - name: jenkins
         image: jenkinsci/blueocean
         ports:
         - containerPort: 8080
           name: jenkins
+        # Volumes im Container
+        volumeMounts:
+        - mountPath: "/src"
+          name: "host-data"
+        - mountPath: "/var/run/docker.sock"
+          name: "docker-sock"   
+        - mountPath: "/usr/bin/kubectl"
+          name: "kubectl"          
+        - mountPath: "/var/jenkins_home/.kube"
+          name: "kube"  
+      # Volumes in Host
+      volumes:
+      - name: "host-data"
+        hostPath:
+         path: "/vagrant" 
+      - name: "docker-cli-data"
+        hostPath:
+         path: "/data/docker-cli"
+      - name: "docker-sock"
+        hostPath:
+         path: "/var/run/docker.sock" 
+      - name: "kubectl"
+        hostPath:
+         path: "/usr/bin/kubectl" 
+      - name: "kube"
+        hostPath:
+         path: "/home/vagrant/.kube"       
