@@ -9,6 +9,7 @@ Diese steht im Verzeichnis `dockerindocker/maven-cli.yaml` zur Verfügung.
 
 Um die Befehle unten abzusetzen ist zuerst die Java/Maven Umgebung zu starten und in dessen Container zu wechseln:
 
+	git clone https://github.com/mc-b/devops.git
 	cd devops/kubernetes
 	kubectl create -f dockerindocker/maven-cli.yaml
 	kubectl exec -it maven-cli -- bash
@@ -24,7 +25,7 @@ Für in sich geschlossene Systeme müssen mehrere Frontends integriert werden. D
 
 Microservices compilieren und Docker Images aufbereiten:
 
-	cd /src
+	cd /src/ewolff
 	git clone https://github.com/mc-b/SCS-ESI.git
 	cd SCS-ESI/scs-demo-esi-order/
 	mvn clean package -Dmaven.test.skip=true
@@ -55,7 +56,7 @@ Dies ist ein Beispiel um zu zeigen, wie Kafka für die Kommunikation zwischen Mi
 
 Microservices compilieren und Docker Images aufbereiten:
 
-	cd /src
+	cd /src/ewolff
 	git clone https://github.com/mc-b/microservice-kafka.git
 	cd microservice-kafka/microservice-kafka
 	mvn clean package -Dmaven.test.skip=true
@@ -96,7 +97,7 @@ Das System hat drei Microservices:
 
 Microservices compilieren und Docker Images aufbereiten:
 
-	cd /src
+	cd /src/ewolff
 	git clone https://github.com/mc-b/microservice-kubernetes.git
 	cd microservice-kubernetes/microservice-kubernetes-demo/
 	mvn clean package -Dmaven.test.skip=true
