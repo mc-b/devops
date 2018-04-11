@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
   #  inline: "route add default gw 10.1.66.254 enp0s8"  
 
   config.vm.provider "virtualbox" do |vb|
-     vb.memory = "2048"
+     vb.memory = "4096"
   end
 
   # Docker Provisioner
