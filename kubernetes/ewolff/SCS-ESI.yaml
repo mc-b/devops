@@ -1,0 +1,120 @@
+# Common        
+apiVersion: v1
+kind: Service
+metadata:
+  name: common
+  labels:
+    app: scsesi-common
+    group: ewolff-scsesi
+    tier: frontend
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: scsesi-common
+  clusterIP: None        
+---
+apiVersion: apps/v1beta2 
+kind: Deployment
+metadata:
+  name: scsesi-common
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scsesi-common
+  template:
+    metadata:
+      labels:
+        app: scsesi-common
+        group: ewolff-scsesi
+        tier: frontend
+    spec:
+      containers:
+      - name: scsesi-common
+        image: scsesi_common
+        imagePullPolicy: IfNotPresent        
+        ports:
+        - containerPort: 8080    
+---        
+# Order        
+apiVersion: v1
+kind: Service
+metadata:
+  name: order
+  labels:
+    app: scsesi-order
+    group: ewolff-scsesi
+    tier: frontend
+spec:
+  ports:
+  - port: 8080
+  selector:
+    app: scsesi-order
+  clusterIP: None        
+---
+apiVersion: apps/v1beta2 
+kind: Deployment
+metadata:
+  name: scsesi-order
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scsesi-order
+  template:
+    metadata:
+      labels:
+        app: scsesi-order
+        group: ewolff-scsesi
+        tier: frontend
+    spec:
+      containers:
+      - name: scsesi-order
+        image: scsesi_order
+        imagePullPolicy: IfNotPresent        
+        ports:
+        - containerPort: 8080        
+---        
+# Varnish Server
+apiVersion: v1
+kind: Service
+metadata:
+  name: scsesi-varnish
+  labels:
+    app: scsesi-varnish
+    group: ewolff-scsesi
+    tier: frontend
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    nodePort: 32080
+    protocol: TCP
+  selector:
+    app: scsesi-varnish
+---
+apiVersion: apps/v1beta2 
+kind: Deployment
+metadata:
+  name: scsesi-varnish
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scsesi-varnish
+  template:
+    metadata:
+      labels:
+        app: scsesi-varnish
+        group: ewolff-scsesi
+        tier: frontend
+    spec:
+      containers:
+      - name: scsesi-varnish
+        image: scsesi_varnish
+        imagePullPolicy: IfNotPresent        
+        ports:
+        - containerPort: 8080
+
+    
