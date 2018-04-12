@@ -5,6 +5,7 @@ Kubernetes Beispiele
 
 * [Git](https://git-scm.com/)
 * [VirtualBox](https://www.virtualbox.org/)
+* optional: [Vagrant](https://www.vagrantup.com/) für die Vagrant Installations Variante 
 
 **Hinweis:** Git auf Windows ohne CR/LF Umwandlung installieren.
 
