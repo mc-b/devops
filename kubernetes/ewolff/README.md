@@ -14,11 +14,6 @@ Um die Befehle unten abzusetzen ist zuerst die Java/Maven Umgebung zu starten un
 	kubectl create -f dockerindocker/maven-cli.yaml
 	kubectl exec -it maven-cli -- bash
 	
-Im Container noch `docker-compose` installieren und die Umgebung ist bereit:
-
-	curl -L https://github.com/docker/compose/releases/download/1.20.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-	chmod 755 /usr/local/bin/docker-compose	
-
 ### SCS ESI Beispiel (Frontend)
 
 Für in sich geschlossene Systeme müssen mehrere Frontends integriert werden. Dieses Beispiel zeigt, wie dies zu tun ist. Varnish dient als Cache, und ESI (Edge Side Includes) wird verwendet, um mehrere Backends in eine HTTP-Site zu integrieren.
@@ -29,22 +24,27 @@ Microservices compilieren und Docker Images aufbereiten:
 	git clone https://github.com/mc-b/SCS-ESI.git
 	cd SCS-ESI/scs-demo-esi-order/
 	mvn clean package -Dmaven.test.skip=true
-	cd ../docker
-	docker-compose build
+	cd ..
+    docker build -t scsesi_varnish docker/varnish
+    docker build -t scsesi_common scs-demo-esi-common
+    docker build -t scsesi_order scs-demo-esi-order
 	docker images | grep scs
 
 Die compilierten Microservices werden im Startverzeichnis der VM abgelegt. 	
 
 Anschliessend können die Microservices gestartet werden:
 	
-	docker-compose up -d
-    docker ps | grep scs
+	cd /src/ewolff 
+	kubectl create -f SCS-ESI.yaml
+	kubectl create -f SCS-ESI-order.yaml
+	kubectl get pods
     
-Probieren mittels [http://<ip NodePort>:8080](http://192.168.60.100:8080) und [http://<ip NodePort>:8090](http://192.168.60.100:8090).
+Probieren mittels [http://ip NodePort:32080](http://192.168.60.100:32080) und [http://ip NodePort:32090](http://192.168.60.100:32090).
 
 Nach dem Test die Container wieder beenden, mittels:
 
-	docker-compose down    
+	kubectl delete -f SCS-ESI.yaml
+	kubectl delete -f SCS-ESI-order.yaml
 
 #### Links
 
@@ -60,22 +60,37 @@ Microservices compilieren und Docker Images aufbereiten:
 	git clone https://github.com/mc-b/microservice-kafka.git
 	cd microservice-kafka/microservice-kafka
 	mvn clean package -Dmaven.test.skip=true
-	cd ../docker
-	docker-compose build
+	cd ..
+	
+    docker build -t mskafka_apache docker/apache	
+    docker build -t mskafka_postgres docker/postgres
+    docker build -t mskafka_order microservice-kafka/microservice-kafka-order
+    docker build -t mskafka_shipping microservice-kafka/microservice-kafka-shipping
+    docker build -t mskafka_invoicing microservice-kafka/microservice-kafka-invoicing
 	docker images | grep mskafka
 	
 Die compilierten Microservices werden im Startverzeichnis der VM abgelegt. 	
 
 Anschliessend können die Microservices gestartet werden:
 	
-	docker-compose up -d
-    docker ps | grep mskafka	
+	cd /src/ewolff 
+	kubectl create -f ms-kafka/
+    kubectl get pods | grep mskafka	
 
-Probieren mittels [http://<ip NodePort>:8080](http://192.168.60.100:8080).
+Probieren mittels [http://ip NodePort:32080](http://192.168.60.100:32080).
 
 Nach dem Test die Container wieder beenden, mittels:
 
-	docker-compose down       
+	kubectl delete -f ms-kafka/
+
+#### Testen
+
+In Kafka Container wechseln und Topics anschauen und dessen Meldungen
+
+	kubectl exec -it $(kubectl get po --selector=app=mskafka-kafka -o=jsonpath='{ .items[0].metadata.name }') -- bash
+	cd /opt/kafka
+	bin/kafka-topics.sh --list --zookeeper zookeeper:2181
+	bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic order --from-beginning
 
 #### Links
 
@@ -109,6 +124,7 @@ Microservices compilieren und Docker Images aufbereiten:
 	docker build --tag=microservice-kubernetes-demo-customer microservice-kubernetes-demo-customer
 	docker build --tag=microservice-kubernetes-demo-order microservice-kubernetes-demo-order
 	docker build --tag=microservice-kubernetes-demo-hystrix-dashboard microservice-kubernetes-demo-hystrix-dashboard
+	docker images | grep microservice
    
 Die compilierten Microservices werden im Startverzeichnis der VM abgelegt. 	
 
