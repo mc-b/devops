@@ -130,17 +130,16 @@ Die compilierten Microservices werden im Startverzeichnis der VM abgelegt.
 
 Anschliessend können die Microservices gestartet werden:
 
-	kubectl run apache --image=microservice-kubernetes-demo-apache:latest --port=80 --image-pull-policy='IfNotPresent'
-	kubectl expose deployment/apache --type="LoadBalancer" --port 80
-	kubectl run catalog --image=microservice-kubernetes-demo-catalog:latest --port=8080 --image-pull-policy='IfNotPresent'
-	kubectl expose deployment/catalog --type="LoadBalancer" --port 8080
-	kubectl run customer --image=microservice-kubernetes-demo-customer:latest --port=8080 --image-pull-policy='IfNotPresent'
-	kubectl expose deployment/customer --type="LoadBalancer" --port 8080
-	kubectl run order --image=microservice-kubernetes-demo-order:latest --port=8080 --image-pull-policy='IfNotPresent'
-	kubectl expose deployment/order --type="LoadBalancer" --port 8080
-	kubectl run hystrix-dashboard --image=microservice-kubernetes-demo-hystrix-dashboard:latest --port=8080 --image-pull-policy='IfNotPresent'
-	kubectl expose deployment/hystrix-dashboard --type="LoadBalancer" --port 8080
-    
+	cd /src/ewolff
+	kubectl create -f ms-kubernetes/
+    kubectl get pods | grep microservice	
+
+Probieren mittels [http://ip NodePort:32080](http://192.168.60.100:32080).
+
+Nach dem Test die Container wieder beenden, mittels:
+
+	kubectl delete -f ms-kubernetes/
+	    
 #### Links
 
 * [github Repository](https://github.com/ewolff/microservice-kubernetes) 
