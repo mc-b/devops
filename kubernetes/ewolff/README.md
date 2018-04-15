@@ -118,12 +118,12 @@ Microservices compilieren und Docker Images aufbereiten:
 	mvn clean package -Dmaven.test.skip=true
 	
 	# docker build
-	docker build --tag=microservice-kubernetes-demo-apache apache
-	docker build --tag=microservice-kubernetes-demo-catalog microservice-kubernetes-demo-catalog
-	docker build --tag=microservice-kubernetes-demo-customer microservice-kubernetes-demo-customer
-	docker build --tag=microservice-kubernetes-demo-customer microservice-kubernetes-demo-customer
-	docker build --tag=microservice-kubernetes-demo-order microservice-kubernetes-demo-order
-	docker build --tag=microservice-kubernetes-demo-hystrix-dashboard microservice-kubernetes-demo-hystrix-dashboard
+	docker build --tag=microservice-kubernetes-demo-apache:0.0.1 apache
+	docker build --tag=microservice-kubernetes-demo-catalog:0.0.1 microservice-kubernetes-demo-catalog
+	docker build --tag=microservice-kubernetes-demo-customer:0.0.1 microservice-kubernetes-demo-customer
+	docker build --tag=microservice-kubernetes-demo-customer:0.0.1 microservice-kubernetes-demo-customer
+	docker build --tag=microservice-kubernetes-demo-order:0.0.1 microservice-kubernetes-demo-order
+	docker build --tag=microservice-kubernetes-demo-hystrix-dashboard:0.0.1 microservice-kubernetes-demo-hystrix-dashboard
 	docker images | grep microservice
    
 Die compilierten Microservices werden im Startverzeichnis der VM abgelegt. 	
