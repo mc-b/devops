@@ -21,7 +21,7 @@ Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt
 * [Minio](minio)
 * [Helm](helm)
 * [DevOps Umgebung](devops)
-* [Buch Microservice Rezepte](ewolff)
+* [Microservice Beispiele](https://github.com/mc-b/misegr)
 * [Tests - ohne Beschreibung](test)
 * [Add-Ons](addons)
 
@@ -81,7 +81,7 @@ Wechsel in das CLI des Containers/Pods
 
 ### Installation via Vagrant
 
-[docker](https://download.docker.com/win/static/stable/x86_64/) und [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) downloaden in in PATH ablegen
+[docker](https://download.docker.com/win/static/stable/x86_64/) und [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) downloaden in PATH ablegen
 
 Dieses Repository in der Git/Bash Shell clonen:
 
@@ -89,7 +89,7 @@ Dieses Repository in der Git/Bash Shell clonen:
 
 Virtuelle Maschine erstellen:
 
-	cd devops/kubernetes/kubeadm
+	cd devops/kubernetes
 	vagrant up
 
 Evtl. ist vorher die fixe IP und der Hostname im Vagrantfile anzupassen. Siehe Bemerkungen im Vagrantfile.
@@ -123,7 +123,7 @@ Das Dashboard ist Standardmässig nicht erreichbar. Dazu muss zuerst ein Proxy z
 	
 Anschliessend kann das Dashboard angewählt werden. Der Logindialog kann mit `Skip` übersprungen werden.
 
-[http://localhost:8001/ui/](http://localhost:8001/ui/)
+[http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/.](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/.)
 
 #### Cluster einrichten
 
