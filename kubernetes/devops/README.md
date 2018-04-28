@@ -39,6 +39,14 @@ Für die Installation wird ein Admin Password benötigt, welches aus dem Log des
 
 Um die Blueocean Oberfläche anzusprechen ist dem URL /blue hintenanzustellen.
 
+Starten:
+
+	kubectl create -f jenkins.yaml
+	
+Die Oberfläche wird fix auf Port 32100 zugewiesen und via [http://192.168.60.100:32100](http://192.168.60.100:32100) erreichbar.
+
+Das Initiale Password kann im Logs des Jenkins Pods ausgelesen werden. 
+
 **Links**
 
 * [Website](https://jenkins.io/)
