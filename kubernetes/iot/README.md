@@ -39,7 +39,7 @@ FHEM Starten - Ingress Variante (das Add-On [Ingress](../addons) muss enabled se
 	
 Aufruf FHEM UI mittels folgendem URL:
 
-	http://<IP LoadBalancer>/fhem
+	https://<IP LoadBalancer>:30443/fhem
 
 ### OpenHAB (Eclipse Smart Home)
 
