@@ -30,7 +30,7 @@ spec:
     spec:
       containers:        
       - name: maven
-        image: maven
+        image: maven:3-alpine
         imagePullPolicy: IfNotPresent        
         # Just spin & wait forever
         command: [ "/bin/bash", "-c", "--" ]

@@ -3,3 +3,5 @@
 /index.html
 /.docker/
 /.kube/
+/dashboard.bat
+/dockerps.bat

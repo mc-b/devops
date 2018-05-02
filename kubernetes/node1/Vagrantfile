@@ -15,12 +15,11 @@ Vagrant.configure("2") do |config|
   # using a specific IP.
   config.vm.hostname = "node1"
   config.vm.network "private_network", ip: "192.168.60.110"
-  # config.vm.network "public_network", ip:"192.168.60.110"
+  # config.vm.network "public_network", bridge: "enp0s8"
   
-  # default router TBZ.
   # config.vm.provision "shell",
   #   run: "always",
-  #  inline: "route add default gw 10.1.66.254 enp0s8"  
+  #   inline: "route add default gw 192.168.178.1 enp0s8 && route del default gw 10.0.2.2 enp0s3"  
 
   config.vm.provider "virtualbox" do |vb|
      vb.memory = "1024"
@@ -33,7 +32,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL 
     # Debug ON!!!
     set -o xtrace
-
+    
 	# Install Kubernetes
 	curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
     sudo echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/Kubernetes.list
