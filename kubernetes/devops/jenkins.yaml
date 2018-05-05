@@ -33,7 +33,8 @@ spec:
     spec:
       securityContext:
        runAsUser: 1000
-       fsGroup: 999    
+       fsGroup: 999  
+       supplementalGroups: [ 1000, 100, 0 ]  
       containers:
       - name: jenkins
         image: jenkinsci/blueocean
