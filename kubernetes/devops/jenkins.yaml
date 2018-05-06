@@ -51,6 +51,8 @@ spec:
           name: "kubectl"          
         - mountPath: "/var/jenkins_home/.kube"
           name: "kube"  
+        - mountPath: "/var/jenkins_home"
+          name: "jenkins-data"
       # Volumes in Host
       volumes:
       - name: "host-data"
@@ -67,4 +69,9 @@ spec:
          path: "/usr/bin/kubectl" 
       - name: "kube"
         hostPath:
-         path: "/home/vagrant/.kube"       
+         path: "/home/vagrant/.kube" 
+      - name: "jenkins-data"
+        hostPath:
+         path: "/vagrant/jenkins"  
+         type: DirectoryOrCreate
+                        

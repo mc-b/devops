@@ -5,3 +5,6 @@
 /.kube/
 /dashboard.bat
 /dockerps.bat
+/kanboard/
+/jenkins/
+/gogs/

@@ -37,3 +37,20 @@ spec:
         ports:
         - containerPort: 80
           name: kanboard
+        # Volumes im Container
+        volumeMounts:
+        - mountPath: "/var/www/app/data"
+          name: "kanboard-data"
+        - mountPath: "/var/www/app/plugins"
+          name: "kanboard-plugins"
+      # Volumes in Host - Verzeichnisse mit Zugriff 777 anlegen
+      volumes:
+      - name: "kanboard-data"
+        hostPath:
+         path: "/vagrant/kanboard/data"
+         type: DirectoryOrCreate
+      - name: "kanboard-plugins"
+        hostPath:
+         path: "/vagrant/kanboard/plugins"           
+         type: DirectoryOrCreate
+         

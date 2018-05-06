@@ -41,3 +41,15 @@ spec:
           name: gogs-ssh
           containerPort: 3000
           name: gogs-ui
+        # Volumes im Container
+        volumeMounts:
+        - mountPath: "/data"
+          name: "gogs-data"
+      # Volumes in Host
+      volumes:
+      - name: "gogs-data"
+        hostPath:
+         path: "/vagrant/gogs" 
+         type: DirectoryOrCreate
+         
+         
