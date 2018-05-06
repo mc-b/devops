@@ -49,7 +49,7 @@ Es sollte ein Pod, mit einem Replica-Set, einem Deployment und einen Service, je
 	
 Der URL ergibt sich aus der IP-Adresse der Node und dem Angezeigten Port, z.B. 
 
-    http://192.168.60.100:30252
+    http://192.168.137.100:30252
     
 Oder wenn NodePort IP und Port automatisch ermittelt werden soll:
  
@@ -129,7 +129,7 @@ Anschliessend kann das Dashboard angewählt werden. Der Logindialog kann mit `Sk
 
 Die Kubernetes/Vagrant Installation ist Standardmässig Clusterfähig. Bei der Installation wird der Befehl ausgegeben, um weitere Nodes hinzuzufügen. Der Befehl sieht in etwa so aus:
 
-	kubeadm join --token <token> 192.168.60.100:6443 --discovery-token-ca-cert-hash <hash>
+	kubeadm join --token <token> 192.168.137.100:6443 --discovery-token-ca-cert-hash <hash>
 
 Weitere Nodes können mittels der Docker Umgebung hinzugefügt werden.
 

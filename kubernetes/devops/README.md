@@ -43,7 +43,7 @@ Starten:
 
 	kubectl create -f jenkins.yaml
 	
-Die Oberfläche wird fix auf Port 32100 zugewiesen und via [http://192.168.60.100:32100](http://192.168.60.100:32100) erreichbar.
+Die Oberfläche wird fix auf Port 32100 zugewiesen und via [http://192.168.137.100:32100](http://192.168.137.100:32100) erreichbar.
 
 Das Initiale Password kann im Logs des Jenkins Pods ausgelesen werden. 
 
