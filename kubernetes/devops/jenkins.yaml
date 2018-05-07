@@ -73,5 +73,5 @@ spec:
       # nur Linux - Windows hat Probleme mit Dateinamen
       #- name: "jenkins-data"
       #  hostPath:
-      #   path: "/vagrant/jenkins"  
+      #   path: "/data/jenkins"  
                         

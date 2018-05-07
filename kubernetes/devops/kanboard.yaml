@@ -47,10 +47,10 @@ spec:
       volumes:
       - name: "kanboard-data"
         hostPath:
-         path: "/vagrant/kanboard/data"
+         path: "/data/kanboard/data"
          type: DirectoryOrCreate
       - name: "kanboard-plugins"
         hostPath:
-         path: "/vagrant/kanboard/plugins"           
+         path: "/data/kanboard/plugins"           
          type: DirectoryOrCreate
          
