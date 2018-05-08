@@ -11,6 +11,12 @@ Kubernetes Beispiele
 
 Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt. Trick: Download neuste [Zip-Datei](https://download.docker.com/win/static/stable/x86_64/), diese entpacken und `docker.exe` im PATH ablegen.  
 
+### Installation
+
+* [Vagrant](#installation-via-vagrant) - empfohlen, Cluster fähig
+* [Minikube - Windows](#installation-via-minikube---windows)
+* [Docker Community (CE) Edition](#installation---docker-community-ce-edition)
+
 ### Beispiele
 
 * [Internet der Dinge](iot)
@@ -24,6 +30,15 @@ Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt
 * [Microservice Beispiele](https://github.com/mc-b/misegr)
 * [Tests - ohne Beschreibung](test)
 * [Add-Ons](addons)
+
+### Hilfsscripts
+
+* `dashboard` - Öffnet das Kubernets Dashboard
+* `dockerps.bat` - Setzt die Umgebungsvariablen für den Zugriff und startet PowerShell
+* `dockersh.bat` - Setzt die Umgebungsvariablen für den Zugriff und startet die Bash
+* `runbash <pod>` - Wechselt in die Bash eines Laufenden Pods (braucht ein Deployment)
+* `startsvc <pod` - Öffnet die Weboberfläche eines Services
+* `waeve` - Öffnet die Waeve Scope Weboberfläche 
 
 ### Starten und Stoppen von Containern/Pods
 
