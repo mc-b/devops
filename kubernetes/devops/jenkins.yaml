@@ -37,7 +37,11 @@ spec:
        supplementalGroups: [ 1000, 100, 0 ]  
       containers:
       - name: jenkins
-        image: jenkinsci/blueocean
+        image: misegr/jenkins
+        imagePullPolicy: IfNotPresent        
+        env:
+        - name: JENKINS_PASS
+          value: admin        
         ports:
         - containerPort: 8080
           name: jenkins
