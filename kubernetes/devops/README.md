@@ -50,6 +50,8 @@ Daten, z.B. README.md verändern und wieder einchecken:
 	git add -A
 	git commit -m "Beschreibung nachgefuehrt"
 	git push
+
+Ohne Änderung in `gogs.yaml` schreibt Gogs die Daten ins Verzeichnis /data/gogs, welches bei der Vagrant Installations Variante im kubernetes/data Verzeichnis auf dem Host gespeichert wird. D.h. die Daten bleiben auch nach Beenden des Containers, der VM erhalten.
 	
 **Links**
 
@@ -68,7 +70,9 @@ Starten:
 
 	kubectl create -f kanboard.yaml
 	
-Web Oberfläche mittels [Cluster-IP:32200](http://192.168.137.100:32200) anwählen. 
+Web Oberfläche mittels [Cluster-IP:32200](http://192.168.137.100:32200) anwählen. Username/Password ist `admin`.
+
+Ohne Änderung in `kanboard.yaml` schreibt Kanboard die Daten ins Verzeichnis /data/kanboard, welches bei der Vagrant Installations Variante im kubernetes/data Verzeichnis auf dem Host gespeichert wird. D.h. die Daten bleiben auch nach Beenden des Containers, der VM erhalten.
 
 **Links**
 
