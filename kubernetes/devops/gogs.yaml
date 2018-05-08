@@ -9,9 +9,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 22
-    protocol: TCP
-    port: 3000
+  - port: 3000
     nodePort: 32300      
     protocol: TCP    
   selector:
@@ -37,9 +35,7 @@ spec:
       - name: gogs
         image: gogs/gogs
         ports:
-        - containerPort: 22
-          name: gogs-ssh
-          containerPort: 3000
+        - containerPort: 3000
           name: gogs-ui
         # Volumes im Container
         volumeMounts:
