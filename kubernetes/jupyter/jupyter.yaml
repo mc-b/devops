@@ -34,6 +34,7 @@ spec:
       containers:
       - name: jupyter
         image: jupyter/all-spark-notebook
+        command: [ "start-notebook.sh", "--NotebookApp.token=''" ]        
         ports:
         - containerPort: 8888
           name: jupyter
