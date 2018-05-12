@@ -42,9 +42,22 @@ spec:
         volumeMounts:
         - mountPath: "/home/jovyan"
           name: "jupyter-data"
+        - mountPath: "/usr/bin/docker"
+          name: "docker"   
+        - mountPath: "/usr/lib/x86_64-linux-gnu/libltdl.so.7"
+          name: "libltdl" 
+        env:
+        - name: DOCKER_HOST
+          value: "tcp://dind:2375"                     
       # Volumes in Host
       volumes:
       - name: "jupyter-data"
         hostPath:
          path: "/data/jupyter" 
          type: DirectoryOrCreate
+      - name: "docker"
+        hostPath:
+         path: "/usr/bin/docker"
+      - name: "libltdl"
+        hostPath:
+         path: "/usr/lib/x86_64-linux-gnu/libltdl.so.7"            
