@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
 	curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
     sudo echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" >> /etc/apt/sources.list.d/Kubernetes.list
     sudo apt-get update
-    sudo apt-get install -y kubelet kubeadm 
+    sudo apt-get install -y kubelet=1.9.7-00 kubeadm=1.9.7-00 
     
 SHELL
 end
