@@ -41,7 +41,7 @@ spec:
           name: jupyter
         # Volumes im Container
         volumeMounts:
-        - mountPath: "/home/jovyan"
+        - mountPath: "/home/jovyan/work"
           name: "jupyter-data"
         - mountPath: "/usr/bin/docker"
           name: "docker"   
