@@ -28,6 +28,7 @@ Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt
 * [Helm](helm)
 * [DevOps Umgebung](devops)
 * [Microservice Beispiele](https://github.com/mc-b/misegr)
+* [Interaktives Lernen mit Jupyter/BeakerX](jupyter)
 * [Tests - ohne Beschreibung](test)
 * [Add-Ons](addons)
 
