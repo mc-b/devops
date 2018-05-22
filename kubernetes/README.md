@@ -39,7 +39,7 @@ Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt
 * `dockersh.bat` - Setzt die Umgebungsvariablen für den Zugriff und startet die Bash
 * `runbash <name>` - Wechselt in die Bash eines Laufenden Pods (braucht ein Deployment)
 * `startsvc <name>` - Öffnet die Weboberfläche eines Services
-* `waeve` - Öffnet die Waeve Scope Weboberfläche 
+* `weave` - Öffnet die Weave Scope Weboberfläche 
 
 ### Starten und Stoppen von Containern/Pods
 
