@@ -31,7 +31,11 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 32200, host: 32200
   config.vm.network "forwarded_port", guest: 32300, host: 32300
   config.vm.network "forwarded_port", guest: 30443, host: 30443
-  
+  # jupyter/beakerX (ML)
+  config.vm.network "forwarded_port", guest: 32088, host: 32088
+  config.vm.network "forwarded_port", guest: 32188, host: 32188
+  config.vm.network "forwarded_port", guest: 32288, host: 32288
+    
   # default router bei Verwendung mit WLAN LERNKUBE (default gw 192.168.3.1) oder RAS Aktivierung in Windows, bzw. auf NIC 
   # config.vm.provision "shell",
   #  run: "always",
