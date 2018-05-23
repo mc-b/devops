@@ -10,7 +10,7 @@ spec:
   type: NodePort
   ports:
   - port: 8888
-    nodePort: 32388    
+    nodePort: 32288    
     protocol: TCP
   selector:
     app: jupyter
