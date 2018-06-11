@@ -40,12 +40,12 @@ spec:
         # Volumes im Container
         volumeMounts:
         - mountPath: "/data"
-          name: "gogs-data"
+          subPath: gogs           
+          name: "gogs-storage"
       # Volumes in Host
       volumes:
-      - name: "gogs-data"
-        hostPath:
-         path: "/data/gogs" 
-         type: DirectoryOrCreate
+      - name: gogs-storage
+        persistentVolumeClaim:
+         claimName: data-claim      
          
          

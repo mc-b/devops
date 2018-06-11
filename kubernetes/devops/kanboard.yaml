@@ -40,17 +40,11 @@ spec:
         # Volumes im Container
         volumeMounts:
         - mountPath: "/var/www/app/data"
+          subPath: kanboard/data 
           name: "kanboard-data"
-        - mountPath: "/var/www/app/plugins"
-          name: "kanboard-plugins"
-      # Volumes in Host - Verzeichnisse mit Zugriff 777 anlegen
+      # Volumes in Host - Verzeichnis kanboard/data mit Zugriff 777 anlegen
       volumes:
       - name: "kanboard-data"
-        hostPath:
-         path: "/data/kanboard/data"
-         type: DirectoryOrCreate
-      - name: "kanboard-plugins"
-        hostPath:
-         path: "/data/kanboard/plugins"           
-         type: DirectoryOrCreate
-         
+        persistentVolumeClaim:
+         claimName: data-claim 
+   

@@ -17,6 +17,8 @@ Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt
 * [Minikube - Windows](#installation-via-minikube---windows)
 * [Docker Community (CE) Edition](#installation---docker-community-ce-edition)
 
+Für alle Installationen, siehe auch Hinweis [Gemeinsame Datenverzeichnisse](data/).
+
 ### Beispiele
 
 * [Internet der Dinge](iot)
