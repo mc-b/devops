@@ -15,7 +15,9 @@ Starten:
 	
 Web Oberfläche mittels [Cluster-IP:32388](http://192.168.137.100:32388) anwählen.
 
-Ohne Änderung in `jupyter.yaml` schreibt Jupyter die Daten ins Verzeichnis /data/jupyter, welches bei der Vagrant Installations Variante im kubernetes/data Verzeichnis auf dem Host gespeichert wird. D.h. die Daten bleiben auch nach Beenden des Containers, der VM erhalten.
+Das Verzeichnis `work` zeigt ins lokale Verzeichnis `kubernetes/data/jupyter`, d.h. die Daten bleiben auch nach Beenden des Containers, der VM erhalten. Siehe auch [Gemeinsames Datenverzeichnis](../data/).
+
+Beispiele für Machine Learning findet man auf [https://notebooks.azure.com/djcordhose/libraries/buch](https://notebooks.azure.com/djcordhose/libraries/buch). Diese können mittels Download und Upload in die Jupyter Umgebung importiert werden.
 
 ### BeakerX
 
@@ -26,3 +28,5 @@ Starten:
 	kubectl create -f jupyter/beakerx.yaml
 	
 Web Oberfläche mittels [Cluster-IP:32088](http://192.168.137.100:32088) anwählen.
+
+Das Verzeichnis `work` zeigt ins lokale Verzeichnis `kubernetes/data/jupyter`, d.h. die Daten bleiben auch nach Beenden des Containers, der VM erhalten. Siehe auch [Gemeinsames Datenverzeichnis](../data/).
