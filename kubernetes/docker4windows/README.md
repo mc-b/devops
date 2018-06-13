@@ -5,6 +5,8 @@ Docker for Windows / Mac
 
 **Shared Drives** aktivieren, Verzeichnis `C:/Users/data` Erstellen und Persistent Volume und Claim in Kubernetes erstellen.
 
+Dem Verzeichnis `C:/Users/data` ist Vollzugriff für `Jeder` freizuschalten.
+
 	kubectl create -f docker4windows/DataVolume.yaml
 
 ![](images/SharedDrives.png)	
