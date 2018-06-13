@@ -18,7 +18,7 @@ Gemeinsames Datenverzeichnis welches von Kubernetes Master und Nodes genützt wi
     +---------------------------------------------------------------+
     ! Persistent Volume: data-volume zeigt auf /data in VM          !	
     +---------------------------------------------------------------+
-    ! Vagrant mounted data Verzeichnis im aktuellen Vereichnis      !
+    ! Vagrant mounted data Verzeichnis im aktuellen Verzeichnis     !
     ! config.vm.synced_folder "data", "/data"                       !                 
     +---------------------------------------------------------------+
     
