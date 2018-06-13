@@ -32,24 +32,32 @@ Im Vagrantfile wird das PersistentVolume und PersistenVolumeClaim erzeugt:
 	
 #### Docker Installation
 
-Auf Windows ist in Docker Settings `Share Drives`, z.B. Laufwerk C:/User/mydata mounten.
+Auf Windows ist in Docker Settings `Share Drives` zuerst das Laufwerk C: freizugeben und dann ein Verzeichnis, z.B. C:/User/mydata, zu mounten.
 
-`data/DataVolume.yaml` hostPath ändern
-
-    hostPath:
-     path: "/data"
-	    
-auf
+Dieses Verzeichnis wird dann in der Datei `data/DataVolume.yaml` als `hostPath` eingetragen: 
 
     hostPath:
      path: "c/User/mydata"
      
-ändern und PersistentVolume erzeugen.
+und PersistentVolume und Claim erzeugt:
 
 	kubectl create -f data/DataVolume.yaml
 
-Anschliessend können die Pods, welche Persistenten Speicher benötigtigen, z.B. Gogs, erzeugt werden, z.B.:
+Die Pods verwenden `PersistentVolumeClaim` und müssen nicht geändert werden.
 
-	kubectl create -f devops/gogs.yaml
+Für neue Pods ist, statt ein `hostPath` als Speicherort `persistentVolumeClaim` einzutragen und ein `subPath`, welcher festlegt in welchem Unterverzeichnis vom Persistent Volume die Daten abgelegt werden.
+
+Beispiel aus `devops/gogs.yaml`:
+
+	    # Volumes im Container
+	    volumeMounts:
+	    - mountPath: "/data"
+	      subPath: gogs           
+	      name: "gogs-storage"
+	  # Volumes in Host
+	  volumes:
+	  - name: gogs-storage
+	    persistentVolumeClaim:
+	     claimName: data-claim  
 		    
     
