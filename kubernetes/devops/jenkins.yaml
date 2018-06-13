@@ -48,6 +48,7 @@ spec:
         # Volumes im Container
         volumeMounts:
         - mountPath: "/src"
+          subPath: src
           name: "host-data"
         - mountPath: "/var/run/docker.sock"
           name: "docker-sock"   
@@ -55,13 +56,11 @@ spec:
           name: "kubectl"          
         - mountPath: "/var/jenkins_home/.kube"
           name: "kube"  
-        #- mountPath: "/var/jenkins_home"
-        #  name: "jenkins-data"
       # Volumes in Host
       volumes:
       - name: "host-data"
-        hostPath:
-         path: "/vagrant" 
+        persistentVolumeClaim:
+         claimName: data-claim 
       - name: "docker-cli-data"
         hostPath:
          path: "/data/docker-cli"
@@ -74,8 +73,4 @@ spec:
       - name: "kube"
         hostPath:
          path: "/home/vagrant/.kube" 
-      # nur Linux - Windows hat Probleme mit Dateinamen
-      #- name: "jenkins-data"
-      #  hostPath:
-      #   path: "/data/jenkins"  
-                        
+                    

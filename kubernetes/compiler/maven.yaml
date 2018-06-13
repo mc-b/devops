@@ -40,8 +40,9 @@ spec:
           name: maven    
         volumeMounts:
         - mountPath: "/src"
+          subPath: src
           name: "host-data"
       volumes:
       - name: "host-data"
-        hostPath:
-         path: "/vagrant"      
+        persistentVolumeClaim:
+         claimName: data-claim  

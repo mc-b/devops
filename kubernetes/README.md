@@ -15,7 +15,7 @@ Für die weitergehenden Beispiele wird die Ausführbare Datei `docker` benötigt
 
 * [Vagrant](#installation-via-vagrant) - empfohlen, Cluster fähig
 * [Minikube - Windows](#installation-via-minikube---windows)
-* [Docker Community (CE) Edition](#installation---docker-community-ce-edition)
+* [Docker Community (CE) Edition](#installation---docker-community-ce-edition) und [Windows Feintuning](docker4windows/)
 
 Für alle Installationen, siehe auch Hinweis [Gemeinsame Datenverzeichnisse](data/).
 

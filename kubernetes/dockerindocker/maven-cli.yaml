@@ -12,6 +12,7 @@ spec:
     args: [ "while true; do sleep 30; done;" ]
     volumeMounts:
     - mountPath: "/src"
+      subPath: src
       name: "host-data"
     - mountPath: "/var/run/docker.sock"
       name: "docker-sock"   
@@ -25,8 +26,8 @@ spec:
       name: "libltdl"           
   volumes:
   - name: "host-data"
-    hostPath:
-     path: "/vagrant" 
+    persistentVolumeClaim:
+     claimName: data-claim  
   - name: "docker-cli-data"
     hostPath:
      path: "/data/docker-cli"
