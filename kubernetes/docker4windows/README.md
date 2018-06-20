@@ -33,12 +33,29 @@ Netzwerk Subnet Address (LoadBalancer = .1) notieren. Diese wird für Services g
 
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 
-Weitere Informationen:
+Weitere:
 * [github Projekt](https://github.com/kubernetes/dashboard)
 
 ### Weave Scope aktivieren (optional)
 
+	kubectl apply -f "https://cloud.weave.works/k8s/scope.yaml?k8s-version=$(kubectl version | base64 | tr -d '\n')"
+	
+Weitere Informationen:
 * [Kubernetes Add-ons](../addons)
 
 ### Ingress (Reverse Proxy) aktivieren (optional)
 
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/namespace.yaml
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/default-backend.yaml
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/configmap.yaml 
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/tcp-services-configmap.yaml 
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/udp-services-configmap.yaml
+	kubectl apply -f  https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/rbac.yaml 
+	kubectl apply -f  https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/with-rbac.yaml 	
+	kubectl apply -f  addons/service-nodeport.yaml
+
+### Namespaces für Microservices (optional)
+
+	kubectl create namespace scsesi
+	kubectl create namespace ms-kafka
+	kubectl create namespace ms-kubernetes
