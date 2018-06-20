@@ -3,13 +3,8 @@ DevOps Beispiele
 
 * [Vagrant Beispiele](vagrant/)
 * [Docker Beispiele](docker/)
-* [Kubernetes - im Aufbau](kubernetes/)
+* [Kubernetes](kubernetes/)
 * [OpenShift - im Aufbau](openshift/)
-
-### Kurse
-
-* [DevOps in der Praxis](https://www.eb-zuerich.ch/angebot/devops-in-der-praxis.html) 
-* [Docker - Container Umgebung aufbauen und betreiben](https://www.eb-zuerich.ch/angebot/docker.html)
 
 ### Benötigte Software
 
