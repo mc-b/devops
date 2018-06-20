@@ -29,6 +29,13 @@ Netzwerk Subnet Address (LoadBalancer = .1) notieren. Diese wird für Services g
 
 ![](images/Kubernetes.png)
 
+## Pods und Services starten
+
+Die folgenden Arbeiten in der Git/Bash ausführen:
+
+	git clone https://github.com/mc-b/devops
+	cd devops/kubernetes
+
 ### Dashboard aktivieren (optional)
 
     kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
