@@ -5,7 +5,7 @@ DevOps Beispiele
 * [Docker Beispiele](docker/)
 * [Kubernetes](kubernetes/)
 * [OpenShift - im Aufbau](openshift/)
-* [Rancher - nur Installation](rancher/)
+* [Ranger - nur Installation](ranger/)
 
 ### Benötigte Software
 
