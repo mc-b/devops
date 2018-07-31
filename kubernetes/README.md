@@ -32,6 +32,7 @@ Für alle Installationen, siehe auch Hinweis [Gemeinsame Datenverzeichnisse](dat
 * [Microservice Beispiele](https://github.com/mc-b/misegr)
 * [Interaktives Lernen mit Jupyter/BeakerX](jupyter)
 * [Tests - ohne Beschreibung](test)
+* [Docker Registry (insecure!)](registry/)
 * [Add-Ons](addons)
 
 ### Hilfsscripts
