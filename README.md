@@ -3,7 +3,7 @@ DevOps Beispiele
 
 * [Vagrant Beispiele](vagrant/)
 * [Docker Beispiele](docker/)
-* [Kubernetes](kubernetes/)
+* [Kubernetes](https://github.com/mc-b/dok/)
 * [OpenShift - im Aufbau](openshift/)
 * [Ranger - nur Installation](ranger/)
 
