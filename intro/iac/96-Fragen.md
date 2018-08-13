@@ -1,10 +1,10 @@
 ### Fragen
 
-{% exercise %}
-* Was ist der Unterschied zur manuellen Installation der VM
-{% solution %}    
-	Automation, Wiederholbarkeit, Dokumentation	
-{% endexercise %}
+**Was ist der Unterschied zur manuellen Installation der VM**
+
+
+<div style="color: blue;">Automation, Wiederholbarkeit, Dokumentation</div>
+
 
 {% exercise %}
 * Was können wir Verbessern, Erweitern?
