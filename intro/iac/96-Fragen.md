@@ -1,20 +1,15 @@
 ### Fragen
 
+
 **Was ist der Unterschied zur manuellen Installation der VM**
 
+<div style="transform: rotate(-180deg); color: green; text-align: right;">Automation, Wiederholbarkeit, Dokumentation</div>
 
-<div style="color: blue;">Automation, Wiederholbarkeit, Dokumentation</div>
+**Was können wir Verbessern, Erweitern?**
 
+<div style="transform: rotate(-180deg); color: green;text-align: right;">index.html mit Inhalt füllen</div>
 
-{% exercise %}
-* Was können wir Verbessern, Erweitern?
-{% solution %}    
-	index.html mit Inhalt füllen
-{% endexercise %}
-
-{% exercise %}
-* Was fehlt, Ausgehend von unseren Zielen?
-{% solution %}    
-	Integrierte Tests, Dokumentation z.B. warum wurde diese Umgebung erstellt	 	
-{% endexercise %}
+**Was fehlt, Ausgehend von unseren Zielen?**
+    
+<div style="transform: rotate(-180deg); color: green;text-align: right;">Integrierte Tests, Dokumentation z.B. warum wurde diese Umgebung erstellt.</div> 	
 
