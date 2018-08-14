@@ -18,12 +18,10 @@ Die nachfolgenden Unterlagen geben einen Einblick über die Konzepte und Tools h
 * [Einleitung: Cloud, Dynamic Infrastructure Platforms, Infrastructure as Code](intro/)
 * [Vagrant, ein Tool zum Erstellen und Verwalten von virtuellen Maschinen](vagrant/)
 
-
-
 ### Container (Docker und Kubernetes)
 
-* [Docker Beispiele](docker/)
-* [Kubernetes](https://github.com/mc-b/dok/)
+* [Container](docker/)
+* [Kubernetes Beispiele](https://github.com/mc-b/dok/)
 * [OpenShift - im Aufbau](openshift/)
 * [Ranger - nur Installation](ranger/)
 

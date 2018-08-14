@@ -1,7 +1,105 @@
-Vagrant Image mit Docker
-------------------------
+Container
+---------
 
-### Übersicht 
+Container ändern die Art und Weise, wie wir Software entwickeln, verteilen und laufen lassen, grundlegend.
+
+Entwickler können Software lokal bauen, die woanders genauso laufen wird – sei es ein Rack in der IT Abteilung,
+der Laptop eines Anwenders oder ein Cluster in der Cloud. 
+
+Administratoren können sich auf die Netzwerke, Ressourcen und die Uptime konzentrieren und müssen weniger Zeit mit dem Konfigurieren von Umgebungen und dem Kampf mit Systemabhängigkeiten verbringen.
+
+### Einleitung Container
+
+* [Container](intro/01-Container.md)
+* [Geschichte](intro/02-Geschichte.md)
+* [Microservices](intro/10-Microservices.md)
+* [Reflexion ](intro/95-Reflexion.md)
+* [Fragen](intro/96-Fragen.md)
+    
+### Docker und Kubernetes
+
+Für die Docker Beispiele eignet sich am Besten die Docker Testumgebung unten.
+    
+#### Docker Grundlagen
+
+* [Docker](intro/docker/01-Docker.md)    
+* [Architektur](intro/docker/02-Architektur.md)    
+* [Befehle](intro/docker/03-Befehle.md)    
+* [Dockerfile](intro/docker/10-Dockerfile.md)    
+* [Reflexion ](intro/docker/95-Reflexion.md)
+* [Fragen](intro/docker/96-Fragen.md)
+
+#### Kubernetes
+
+Für Kubernetes ist es am Besten die Umgebung aus dem Kurs [Docker und Kubernetes – Übersicht und Einsatz](https://github.com/mc-b/dok) zu Verwenden.
+
+**Service Discovery, Cluster- und Orchestrierung**
+* [Service Discovery](intro/orchestrierung/01-Discovery.md)
+* [Clustering und Orchestrierung](intro/orchestrierung/02-Orchestrierung.md)
+* [Load Balancing am Beispiel Web Server](intro/orchestrierung/12-Webserver.md)
+
+**Kubernetes**
+* [Kubernetes (K8s)](intro/orchestrierung/30-Kubernetes.md)
+* [Reflexion ](intro/orchestrierung/95-Reflexion.md)
+* [Fragen](intro/orchestrierung/96-Fragen.md)
+
+#### Docker (optional)
+    
+**Container mit der Aussenwelt verbinden und verlinken (optional)**
+* [Ports](intro/dockernetwork/01-Ports.md)    
+* [Container verlinken (alt) (optional)](intro/dockernetwork/02-Linken.md)    
+* [Docker container networking (neu) (optional)](intro/dockernetwork/10-Network.md)    
+* [Reflexion ](intro/dockernetwork/95-Reflexion.md)
+* [Fragen](intro/dockernetwork/96-Fragen.md)   
+    
+**Volumes (optional)**
+* [Einleitung](intro/dockervolume/01-Einleitung.md)
+* [Volumes](intro/dockervolume/02-Volume.md)
+* [Datacontainer (optional)](intro/dockervolume/03-DataContainer.md)
+* [Named Volumes (optional)](intro/dockervolume/04-NamedVolumes.md)
+* [Reflexion ](intro/dockervolume/95-Reflexion.md)
+* [Fragen](intro/dockervolume/96-Fragen.md) 
+    
+**Bereitstellen von Images - Docker Hub (optional)**
+* [Bereitstellen von Images](intro/dockerhub/01-Einleitung.md)
+* [Docker Hub](intro/dockerhub/02-DockerHub.md)
+* [Images und Container - von/nach Dateien](intro/dockerhub/03-Load.md)
+* [Private Registry](intro/dockerhub/04-Registry.md)
+* [Reflexion ](intro/dockerhub/95-Reflexion.md)
+* [Fragen](intro/dockerhub/96-Fragen.md)
+
+**Docker Compose (optional)**
+* [Docker Compose](intro/dockercompose/01-Compose.md)
+* [YAML](intro/dockercompose/02-YAML.md)
+* [Reflexion ](intro/dockercompose/95-Reflexion.md)
+* [Fragen](intro/dockercompose/96-Fragen.md) 
+
+### Container Sichern und Beschränken
+
+**Protokollieren und Überwachen**
+* [Einleitung](intro/dockerlogs/01-Einleitung.md)
+* [Logging](intro/dockerlogs/02-Logging.md)
+* [Überwachen und Benachrichtigen](intro/dockerlogs/03-Monitoring.md)
+* [Reflexion ](intro/dockerlogs/95-Reflexion.md)
+* [Fragen](intro/dockerlogs/96-Fragen.md)
+      
+**Container sichern und beschränken (optional)**
+* [Einleitung](intro/security/01-Einleitung.md)
+* [Worüber Sie sich Gedanken machen sollten](intro/security/02-Allgemeines.md)
+* [Least Privilege](intro/security/03-LeastPrivilege.md)
+* [Container absichern](intro/security/04-Absichern.md)
+* [Container nach Host trennen](intro/security/05-Hosts.md)
+* [Sicherheitstips](intro/security/10-Tips.md)    
+* [Reflexion ](intro/security/95-Reflexion.md)
+* [Fragen](intro/security/96-Fragen.md)      
+    
+**Kontinuierliche Integration, Unittest (optional)**
+* [Kontinuierliche Integration](intro/citest/01-CI.md)
+* [Unittest](intro/citest/02-Unittest.md)
+* [Reflexion ](intro/citest/95-Reflexion.md)
+* [Fragen](intro/citest/96-Fragen.md)
+
+### Docker Testumgebung (alt)
 
     +---------------------------------------------------------------+
     ! Container-Engine: Docker                                      !	
@@ -14,8 +112,8 @@ Vagrant Image mit Docker
     +---------------------------------------------------------------+
     ! Notebook - Schulnetz 10.x.x.x                                 !                 
     +---------------------------------------------------------------+
-	
-### Beschreibung
+
+**Beschreibung**
 
 Einfache VM mit Docker installiert.
 
@@ -35,99 +133,4 @@ Die Beispiele befinden sich, in der VM, im Verzeichnis `/vagrant`. Die Anwahl is
 	vagrant ssh
 	cd /vagrant/<Beispiel>
 	
-**Beispiele mit eigener VM**
-
-Folgende Beispiele erzeugen eine oder mehrere VMs' welche mittels Docker Swarm oder Data Center zusammengehängt werden können.
-
-* [swarm - Docker Swarm](swarm/)
-* [dc - Docker Data Center](dc/)
-
-
-### Aktivierung Docker TCP Port (2375, 2376)
-
-Soll via docker for Windows auf die Docker Engine in der VM zugegriffen werden ist der Port 2375 (unverschlüsselt) oder 2376 (verschlüsselt) freizuschalten.
-
-Dazu in der VM die Datei `/etc/systemd/system/multi-user.target.wants/docker.service` folgenden Eintrag erweitern:
-
-	ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
-	
-Service docker und systemd restarten
-
-    sudo systemctl daemon-reload
-    sudo service docker restart
-
-Der Port 2375 muss dann in der VirtualBox Oberfläche oder in `Vagrantfile` freigegeben werden
-
-	config.vm.network "forwarded_port", guest:2375, host:2375, auto_correct: false
-	
-oder ein Privates Netzwerk (besser) eingerichtet werden:
-
-    config.vm.network "private_network", ip: "192.168.55.100"	
-	
-Der Zugriff via docker for Windows erfolgt dann mittels:
-
-	docker -H tcp://localhost ...
-	docker -H tcp://192.168.55.100 ...
-	
-z.B.
-
-	docker -H tcp://localhost run hello-world
-	
-**Links:**
-
-* [dockerd](https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-socket-option)
-
-### Docker REST
-
-Wenn wie oben der Docker Port aktiviert ist, kann via REST (curl) Aufrufen auf Docker zugegriffen werden.
-
-Anzeige der Images:
-
-	curl http://192.168.55.100:2375/v1.24/images/json 
-
-Erstellen eines Containers:
-
-	curl -X POST -H "Content-Type: application/json" \
-	     http://192.168.55.100:2375/v1.24/containers/create \
-	     -d '{ "Image": "hello-world" }'
-
-Anschliessend kann der Container anhand der ID gestartet werden:
-
-    curl -X POST -H "Content-Type: application/json" http://192.168.55.100:2375/v1.24/containers/<id>/start
-
-**Links:**
-
-* [Getting started with the Engine API](https://docs.docker.com/engine/api/getting-started/)
-
-### Alternativen (docker-machine - nur Windows) mit VirtualBox
-
-docker for Windows installieren und bei der Aufforderung `hyper-v` zu aktivieren Abbrechen!
-
-Git-Bash starten und neue VM mittels folgenden Befehlen erstellen:
-
-	docker-machine create -d "virtualbox" dockervm
-	
-Zugriffsinformationen ausgeben:	
-	
-	docker-machine env dockervm
-	
-`export` Anweisungen kopieren und in Git-Bash ausführen, z.B. 
-
-    export DOCKER_TLS_VERIFY="1"
-    export DOCKER_HOST="tcp://192.168.99.100:2376"
-    export DOCKER_CERT_PATH="C:\Users\...\.docker\machine\machines\dockervm"
-    export DOCKER_MACHINE_NAME="dockervm"
-    export COMPOSE_CONVERT_WINDOWS_PATHS="true"
-
-Ausprobieren mittels
-
-	docker run hello-world
-	
-Um eine Shell in einem Docker Container zu starten ist `winpty` Voranzustellen
-
-	winpty docker run --rm -it ubuntu bash
-	
-In die VM kann mittels `ssh` gewechselt werden:
-
-	ssh -i $DOCKER_CERT_PATH/id_rsa docker@192.168.99.100
 
