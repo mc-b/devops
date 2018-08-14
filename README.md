@@ -1,5 +1,5 @@
-DevOps Beispiele
-================
+DevOps Übersicht und Beispiele
+==============================
 
 * [Einleitung](intro/)
 * [Vagrant](vagrant/)
