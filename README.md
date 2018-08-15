@@ -25,3 +25,33 @@ Die nachfolgenden Unterlagen geben einen Einblick über die Konzepte und Tools h
 * [OpenShift - im Aufbau](openshift/)
 * [Ranger - nur Installation](ranger/)
 
+### Ergänzende Unterlagen
+
+**Linux**
+* [Linux](intro/linux/01-Linux.md)
+* [Bash](intro/linux/10-Bash.md)
+* [Advanced Packaging Tool (APT)](intro/linux/20-APTTool.md)
+* [cURL](intro/linux/30-cURL.md)
+* [Reflexion ](intro/linux/95-Reflexion.md)
+* [Fragen](intro/linux/96-Fragen.md)
+
+**Versionsverwaltung**
+* [Versionsverwaltung](intro/vcs/01-VCS.md)
+* [Repository](intro/vcs/02-Repository.md)
+* [Markdown](intro/vcs/03-Markdown.md)
+* [Reflexion ](intro/vcs/95-Reflexion.md)
+* [Fragen](intro/vcs/96-Fragen.md)
+    
+**Software Konfiguration**
+* [Einleitung](intro/swkonfiguration/01-Einleitung.md)
+* [Tools](intro/swkonfiguration/02-Tools.md)
+* [Reflexion ](intro/swkonfiguration/95-Reflexion.md)
+* [Fragen](intro/swkonfiguration/96-Fragen.md)
+    
+**Service Konfiguration**
+* [Einleitung](intro/srvkonfigurationn/01-Einleitung.md)
+* [systemd](intro/srvkonfigurationn/02-systemd.md)
+* [cron](intro/srvkonfigurationn/03-cron.md)
+* [Anacron](intro/srvkonfigurationn/04-Anacron.md)
+* [Reflexion ](intro/srvkonfigurationn/95-Reflexion.md)
+* [Fragen](intro/srvkonfigurationn/96-Fragen.md)  
