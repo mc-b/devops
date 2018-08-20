@@ -21,7 +21,7 @@ Die nachfolgenden Unterlagen geben einen Einblick über die Konzepte und Tools h
 ### Container (Docker und Kubernetes)
 
 * [Container](docker/)
-* [Kubernetes Beispiele](https://github.com/mc-b/dok/)
+* [Kubernetes Beispiele](https://github.com/mc-b/duk/)
 * [OpenShift - im Aufbau](openshift/)
 * [Ranger - nur Installation](ranger/)
 
