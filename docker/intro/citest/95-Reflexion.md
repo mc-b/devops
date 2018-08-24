@@ -9,5 +9,5 @@ Jenkins ist ein beliebter Open-Source-CI-Server.
 
 ### Beispiele
 
-* [jenkins](https://github.com/mc-b/dok/tree/master/devops#jenkins-mit-blueocean) - Jenkins Umgebung in Kubernetes
+* [jenkins](https://github.com/mc-b/duk/tree/master/devops#jenkins-mit-blueocean) - Jenkins Umgebung in Kubernetes
 

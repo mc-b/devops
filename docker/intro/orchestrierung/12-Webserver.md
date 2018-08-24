@@ -13,7 +13,7 @@ Für dieses Beispiel verwenden wir [hello-world](https://github.com/docker/docke
 
 hello-world Beispiel starten
 
-	kubectl create -f dok/test/dockercloud.yaml
+	kubectl create -f duk/test/dockercloud.yaml
 	
 Webseite mittels cURL Abfragen:
 
