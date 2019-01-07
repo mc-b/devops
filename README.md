@@ -1,6 +1,10 @@
 DevOps Übersicht und Beispiele
 ==============================
 
+**ACHTUNG: dieses Repository ist obsolet und wird nicht weiter Entwickelt. Die aktuelle Dokumentation befindet sich im Projekt** [M300](https://github.com/mc-b/M300).
+
+- - -
+
 DevOps beschreibt einen Prozessverbesserungs-Ansatz aus den Bereichen der Softwareentwicklung (Dev) und Systemadministration (Ops).
 
 Die nachfolgenden Unterlagen geben einen Einblick über die Konzepte und Tools hinter DevOps. 
