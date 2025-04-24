@@ -1,0 +1,19 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: devops
+  namespace: mc-b
+  description: DevOps Beispiele - neue Version siehe https://github.com/mc-b/M300
+  tags: []
+  links:
+  - url: https://github.com/mc-b/devops
+    title: Repository
+    icon: github
+  annotations:
+    github.com/project-slug: mc-b/devops
+    backstage.io/source-location: url:https://github.com/mc-b/devops
+    # backstage.io/techdocs-ref: url:https://github.com/mc-b/devops
+spec:
+  type: education
+  lifecycle: deprecated
+  owner: group:mc-b/mc-b
